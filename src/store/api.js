@@ -1,6 +1,6 @@
 export default {
   /* POST /login */
-  home: 'localhost:3000'
+  home: process.env.apiUrl + '/'
   /* GET /logout */
   // logout: process.env.apiUrl + '/logout',
   /* POST /register */

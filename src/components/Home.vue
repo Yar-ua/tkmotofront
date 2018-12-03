@@ -19,6 +19,7 @@ import { mapState } from 'vuex'
 
 export default {
   name: 'Home',
+  body: '',
   data () {
     return {
       msg: 'My home page'
@@ -32,11 +33,8 @@ export default {
 
   methods: {
     homeAction: function () {
-      this.$store.dispatch('home', {})
-        .then(() => {
-          this.hasError = false
-          // this.$router.push({name: 'AddsList'})
-        }).catch(err => {
+      this.$store.dispatch('home', '')
+        .catch(err => {
           if (err.response.status !== 200) {
             this.hasError = true
           }
