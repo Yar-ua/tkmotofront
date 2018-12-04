@@ -1,21 +1,34 @@
 <template>
-  <div id="app">
+  <v-app id="inspire" dark>
+    <app-header></app-header>
     <v-content>
       <v-container fluid fill-height>
         <v-layout justify-center align-center>
-          <router-view/>
+          <v-flex>
+            <router-view/>
+          </v-flex>
         </v-layout>
       </v-container>
     </v-content>
     <v-footer app fixed>
       <span>&copy; Yar-ua 2018</span>
     </v-footer>
-  </div>
+  </v-app>
 </template>
 
 <script>
+
+import Header from '@/components/Header'
+
 export default {
-  name: 'App'
+  name: 'App',
+  drawer: false,
+  components: {
+    'app-header': Header
+  },
+  props: {
+    source: String
+  }
 }
 </script>
 

@@ -8,12 +8,12 @@ Vue.use(Vuex)
 
 const Store = new Vuex.Store({
   state: {
-    body: {}
+    data: ''
   },
 
   mutations: {
-    setBody (state, data) {
-      state.body = data
+    setData (state, data) {
+      state.data = data
     }
   },
 
@@ -21,7 +21,19 @@ const Store = new Vuex.Store({
     home (context) {
       return axios.get(API.home)
         .then(response => {
-          context.commit('setBody', response.data)
+          context.commit('setData', response.data)
+        })
+    },
+    about (context) {
+      return axios.get(API.about)
+        .then(response => {
+          context.commit('setData', response.data)
+        })
+    },
+    secure (context) {
+      return axios.get(API.secure)
+        .then(response => {
+          context.commit('setData', response.data)
         })
     }
   }
