@@ -39,16 +39,16 @@
         <v-btn flat :to="{name: 'UsersList'}">Users control</v-btn>
       </template>
         <v-btn flat :to="{name: 'AddsList'}">Market Menu</v-btn>
-        <template v-if="!isAuth">
-          <v-btn flat :to="{name: 'Login'}">Login</v-btn>
-          <v-btn flat :to="{name: 'Register'}">Register</v-btn>
-        </template>
+        <template v-if="!isAuth"> -->
+          <v-btn flat :to="{name: 'SignIn'}">SignIn</v-btn>
+          <v-btn flat :to="{name: 'SignUp'}">SignUp</v-btn>
+<!--        </template>
         <template v-if="isAuth">
           <v-btn flat>
             User login: {{ user.user }}
-          </v-btn>
+          </v-btn> -->
           <v-btn flat @click="logoutAction">Logout</v-btn>
-        </template> -->
+<!--        </template> -->
       </v-toolbar-items>
     </v-toolbar>
   </div>
@@ -70,9 +70,9 @@ export default {
   },
   methods: {
     logoutAction: function () {
-      this.$store.dispatch('logout', '')
+      this.$store.dispatch('sign_out', '')
         .then(() => {
-          this.$router.push({name: 'AddsList'})
+          this.$router.push({name: 'Home'})
         }).catch(err => {
           if (err.response.status !== 200) {
             this.hasError = true

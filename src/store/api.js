@@ -1,7 +1,10 @@
 export default {
   home: process.env.apiUrl + '/',
   about: process.env.apiUrl + '/about',
-  secure: process.env.apiUrl + '/secure'
+  secure: process.env.apiUrl + '/secure',
+  sign_up: process.env.apiUrl + '/auth',
+  sign_in: process.env.apiUrl + '/auth/sign_in',
+  sign_out: process.env.apiUrl + '/auth/sign_out'
   /* GET /logout */
   // logout: process.env.apiUrl + '/logout',
   /* POST /register */
