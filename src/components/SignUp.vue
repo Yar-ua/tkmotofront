@@ -10,14 +10,14 @@
           <v-card-text>
             <v-text-field
               label="Login..."
-              :rules="loginRules"
+              :rules="[rules.loginRequired, rules.loginMax]"
               v-model="login"
               hint="Enter your login!"
               persistent-hint
             ></v-text-field>
             <v-text-field
               v-model="email"
-              :rules="emailRules"
+              :rules="[rules.emailRequired, rules.emailValid]"
               label="E-mail"
               required
             ></v-text-field>
@@ -28,10 +28,10 @@
               persistent-hint
               v-model="password"
               min="8"
-              :rules="passwordRules"
-              :append-icon="watchpass ? 'visibility' : 'visibility_off'"
-              :append-icon-cb="() => (watchpass = !watchpass)"
-              :type="watchpass ? 'password' : 'text'"
+              :rules="[rules.passwordRequired, rules.passwordMin, rules.passwordMax]"
+              :append-icon="show ? 'visibility_off' : 'visibility'"
+              @click:append="show = !show"
+              :type="show ? 'twxt' : 'password'"
               counter
             ></v-text-field>
             <v-text-field
@@ -41,9 +41,10 @@
               persistent-hint
               v-model="repassword"
               min="8"
-              :rules="passwordRules"
-              :append-icon-cb="() => (watchpass = !watchpass)"
-              :type="watchpass ? 'password' : 'text'"
+              :rules="[rules.passwordRequired, rules.passwordMin, rules.passwordMax]"
+              :append-icon="show ? 'visibility_off' : 'visibility'"
+              @click:append="show = !show"
+              :type="show ? 'twxt' : 'password'"
               counter
             ></v-text-field>
           </v-card-text>
@@ -74,22 +75,19 @@ export default {
   name: 'SignUp',
   data: () => ({
     login: '',
-    loginRules: [
-      v => !!v || 'Login is required',
-      v => (v && v.length <= 30) || 'Login must be less than 30 characters'
-    ],
+    rules: {
+      loginRequired: v => !!v || 'Login is required',
+      loginMax: v => (v && v.length <= 30) || 'Login must be less than 30 characters',
+      emailRequired: v => !!v || 'E-mail is required',
+      emailValid: v => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail must be valid',
+      passwordRequired: v => !!v || 'Name is required',
+      passwordMax: v => (v && v.length <= 30) || 'Password must be less than 30 characters',
+      passwordMin: v => (v && v.length >= 8) || 'Password must be more than 8 characters'
+    },
     email: '',
-    emailRules: [
-      v => !!v || 'E-mail is required',
-      v => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail must be valid'],
     password: '',
-    passwordRules: [
-      v => !!v || 'Name is required',
-      v => (v && v.length <= 30) || 'Password must be less than 30 characters',
-      v => (v && v.length >= 8) || 'Password must be more than 8 characters'
-    ],
     repassword: '',
-    watchpass: true,
+    show: false,
     valid: true,
     hasError: false
   }),
@@ -109,11 +107,11 @@ export default {
             }
           })
       }
-    }
-  },
-  created () {
-    if (this.isAuth) {
-      this.$router.push({name: 'Home'})
+    },
+    created () {
+      if (this.isAuth) {
+        this.$router.push({name: 'Home'})
+      }
     }
   }
 }
