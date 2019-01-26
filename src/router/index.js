@@ -4,6 +4,7 @@ import Home from '@/components/Home'
 import Page404 from '@/components/Page404'
 import SignUp from '@/components/SignUp'
 import SignIn from '@/components/SignIn'
+import Bikes from '@/components/Bikes'
 
 Vue.use(Router)
 
@@ -28,6 +29,11 @@ export default new Router({
       path: 'sign_in',
       name: 'SignIn',
       component: SignIn
+    },
+    {
+      path: 'bikes',
+      name: 'Bikes',
+      component: Bikes
     }
   ]
 })

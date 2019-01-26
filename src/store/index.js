@@ -29,13 +29,13 @@ const Store = new Vuex.Store({
       state.isAuth = data
     },
     updateUser (state, data) {
-      localStorage.id = data['id']
-      localStorage.user = data['name']
-      localStorage.email = data['email']
+      localStorage.id = data.data['id']
+      localStorage.user = data.data['name']
+      localStorage.email = data.data['email']
       state.user = {
-        id: data.id,
-        user: data.name,
-        email: data.email
+        id: data.data.id,
+        user: data.data.name,
+        email: data.data.email
       }
     },
     updateTokens (state, headers) {
@@ -51,6 +51,10 @@ const Store = new Vuex.Store({
         bearer: headers['Bearer'],
         uid: headers['uid']
       }
+    },
+    clearLocalStorage () {
+      console.log('clearLocalStorage')
+      // localStorage.clear()
     }
   },
 
@@ -92,10 +96,10 @@ const Store = new Vuex.Store({
     sign_out (context) {
       return axios.delete(API.sign_out, '')
         .then(response => {
-          context.commit('updateUser', {'id': '', 'name': '', 'email': ''})
+          context.commit('updateUser', {'data': {'id': '', 'name': '', 'email': ''}})
           context.commit('updateAuth', false)
           context.commit('updateTokens', response.headers)
-          localStorage.clear()
+          context.commit('clearLocalStorage', '')
         })
     }
   }

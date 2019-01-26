@@ -5,7 +5,7 @@
       dismissible
       type="error"
     >
-      You must register or sign in
+      {{ alertText }}
     </v-alert>
     <h1>{{ msg }}</h1>
     <h1>{{ data }}</h1>
@@ -42,7 +42,8 @@ export default {
   data () {
     return {
       msg: 'My home page',
-      alert: false
+      alert: false,
+      alertText: ''
     }
   },
   computed: {
@@ -54,6 +55,9 @@ export default {
   methods: {
     homeAction: function () {
       this.$store.dispatch('home', '')
+        .then(response => {
+          alert(response.status)
+        })
         .catch(err => {
           if (err.response.status !== 200) {
             this.hasError = true
@@ -71,9 +75,11 @@ export default {
     secureAction: function () {
       this.$store.dispatch('secure', '')
         .catch(err => {
-          if (err.response.status !== 200) {
+          if (err !== 200) {
             // this.hasError = true,
+            console.log(err.response.statusText)
             this.alert = true
+            this.alertText = err.response.statusText
           }
         })
     }

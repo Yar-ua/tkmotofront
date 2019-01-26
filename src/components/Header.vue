@@ -30,6 +30,8 @@
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
       <!-- <img id="logo" src="@/assets/logo.png" alt="Smiley face"> -->
       <v-toolbar-title>TKMoto</v-toolbar-title>
+      <v-btn flat :to="{name: 'Home'}">Home</v-btn>
+      <v-btn flat :to="{name: 'Bikes'}">Moto</v-btn>
 <!--       <template v-if="user.role === 'admin'">
         <v-toolbar-title>admin mode</v-toolbar-title>
       </template> -->
