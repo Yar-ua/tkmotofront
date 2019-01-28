@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import axios from 'axios'
 
 import API from './api'
+import bike from './bike'
 
 Vue.use(Vuex)
 
@@ -18,6 +19,10 @@ const Store = new Vuex.Store({
       uid: localStorage.uid ? localStorage.uid : ''
     },
     user: {}
+  },
+
+  modules: {
+    bike
   },
 
   mutations: {
@@ -42,19 +47,18 @@ const Store = new Vuex.Store({
       localStorage.accessToken = headers['access-token']
       localStorage.client = headers['client']
       localStorage.expiry = headers['expiry']
-      localStorage.bearer = headers['Bearer']
+      localStorage.tokenType = headers['token-type']
       localStorage.uid = headers['uid']
       state.tokens = {
         accessToken: headers['access-token'],
         client: headers['client'],
         expiry: headers['expiry'],
-        bearer: headers['Bearer'],
+        bearer: headers['token-type'],
         uid: headers['uid']
       }
     },
     clearLocalStorage () {
-      console.log('clearLocalStorage')
-      // localStorage.clear()
+      localStorage.clear()
     }
   },
 
@@ -119,7 +123,7 @@ function setTokensInHeaders (config) {
   config.headers.common['access-token'] = localStorage.accessToken
   config.headers.common['client'] = localStorage.client
   config.headers.common['expiry'] = localStorage.expiry
-  config.headers.common['Bearer'] = localStorage.bearer
+  config.headers.common['token-type'] = localStorage.tokenType
   config.headers.common['uid'] = localStorage.uid
   return config
 }
