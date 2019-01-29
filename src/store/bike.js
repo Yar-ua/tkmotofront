@@ -4,7 +4,8 @@ import API from './api'
 export default {
   namespaced: true,
   state: {
-    bikesList: 'bikes list'
+    addsList: 'bikes list',
+    addItem: {}
   },
 
   mutations: {
