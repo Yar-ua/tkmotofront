@@ -26,7 +26,7 @@ const Store = new Vuex.Store({
   },
 
   getters: {
-    isAuthStatus: state => state.isAuth
+    isAuth: state => state.isAuth
   },
 
   modules: {

@@ -125,9 +125,10 @@ export default {
       item: 'addItem'
     }),
     ...mapState({
-      isAuth: 'isAuth',
+      // isAuth: 'isAuth',
       user: 'user'
-    })
+    }),
+    isAuth () { return this.$store.getters.isAuth }
   },
   // methods: {
   //   save: function () {

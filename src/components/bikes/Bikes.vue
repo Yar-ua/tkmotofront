@@ -79,9 +79,10 @@ export default {
       bikesList: 'addsList'
     }),
     ...mapState({
-      isAuth: 'isAuth',
+      // isAuth: 'isAuth',
       user: 'user'
-    })
+    }),
+    isAuth () { return this.$store.getters.isAuth }
   },
 
   // methods: {

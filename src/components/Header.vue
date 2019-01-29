@@ -47,7 +47,7 @@
        </template>
         <template v-if="isAuth">
           <v-btn flat color="yellow">
-            User login: {{ user.user }}
+            User login: {{ user }}
           </v-btn>
           <v-btn flat @click="logoutAction">Logout</v-btn>
        </template>
@@ -66,9 +66,10 @@ export default {
   }),
   computed: {
     ...mapState({
-      isAuth: 'isAuth',
+      // isAuth: 'isAuth',
       user: 'user'
-    })
+    }),
+    isAuth () { return this.$store.getters.isAuth }
   },
   methods: {
     logoutAction: function () {

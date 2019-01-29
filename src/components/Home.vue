@@ -77,7 +77,6 @@ export default {
         .catch(err => {
           if (err !== 200) {
             // this.hasError = true,
-            console.log(err.response.statusText)
             this.alert = true
             this.alertText = err.response.statusText
           }

@@ -11,7 +11,7 @@
       </v-container>
     </v-content>
     <v-footer app fixed>
-      <span>&copy; Yar-ua 2018</span>
+      <span>&copy; Yar-ua 2019</span>
     </v-footer>
   </v-app>
 </template>

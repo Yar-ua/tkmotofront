@@ -51,7 +51,7 @@ export default new Router({
       name: 'BikeForm',
       component: BikeForm,
       beforeEnter (to, from, next) {
-        if (store.getters.isAuthStatus) {
+        if (store.getters.isAuth) {
           next()
         } else {
           next('/no_permission')
