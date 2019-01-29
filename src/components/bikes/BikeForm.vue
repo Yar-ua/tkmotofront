@@ -123,6 +123,10 @@ export default {
   computed: {
     ...mapState('bike', {
       item: 'addItem'
+    }),
+    ...mapState({
+      isAuth: 'isAuth',
+      user: 'user'
     })
   },
   // methods: {

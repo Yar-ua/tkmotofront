@@ -11,14 +11,14 @@
               <v-flex xs12 sm6 class="py-2">
               </v-flex>
             </v-spacer>
-            <!-- <template v-if="auth"> -->
+            <template v-if="isAuth">
               <v-btn
                 color="red darken-3"
                 :to="{name: 'BikeForm', params: {id: 'new'}}"
               >
                 Create new bike
               </v-btn>
-<!--             </template> -->
+            </template>
           </v-toolbar>
           <v-layout row wrap v-for="item in bikesList" :key="item.id">
             <v-flex xs12>
@@ -77,6 +77,10 @@ export default {
   computed: {
     ...mapState('bike', {
       bikesList: 'addsList'
+    }),
+    ...mapState({
+      isAuth: 'isAuth',
+      user: 'user'
     })
   },
 

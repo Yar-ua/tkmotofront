@@ -31,7 +31,7 @@
       <!-- <img id="logo" src="@/assets/logo.png" alt="Smiley face"> -->
       <v-toolbar-title>TKMoto</v-toolbar-title>
       <v-btn flat :to="{name: 'Home'}">Home</v-btn>
-      <v-btn flat :to="{name: 'Bikes'}">Moto</v-btn>
+      <v-btn flat :to="{name: 'Bikes'}">Moto</v-btn>isauth: {{isAuth}}
 <!--       <template v-if="user.role === 'admin'">
         <v-toolbar-title>admin mode</v-toolbar-title>
       </template> -->
@@ -40,17 +40,17 @@
 <!--       <template v-if="user.role === 'admin'">
         <v-btn flat :to="{name: 'UsersList'}">Users control</v-btn>
       </template>
-        <v-btn flat :to="{name: 'AddsList'}">Market Menu</v-btn>
-        <template v-if="!isAuth"> -->
+        <v-btn flat :to="{name: 'AddsList'}">Market Menu</v-btn> -->
+        <template v-if="!isAuth">
           <v-btn flat :to="{name: 'SignIn'}">SignIn</v-btn>
           <v-btn flat :to="{name: 'SignUp'}">SignUp</v-btn>
-<!--        </template>
+       </template>
         <template v-if="isAuth">
-          <v-btn flat>
+          <v-btn flat color="yellow">
             User login: {{ user.user }}
-          </v-btn> -->
+          </v-btn>
           <v-btn flat @click="logoutAction">Logout</v-btn>
-<!--        </template> -->
+       </template>
       </v-toolbar-items>
     </v-toolbar>
   </div>

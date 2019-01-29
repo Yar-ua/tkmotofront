@@ -18,7 +18,15 @@ const Store = new Vuex.Store({
       bearer: localStorage.bearer ? localStorage.bearer : '',
       uid: localStorage.uid ? localStorage.uid : ''
     },
-    user: {}
+    user: {
+      id: localStorage.id ? localStorage.id : null,
+      user: localStorage.user ? localStorage.user : null,
+      email: localStorage.email ? localStorage.email : null
+    }
+  },
+
+  getters: {
+    isAuthStatus: state => state.isAuth
   },
 
   modules: {
