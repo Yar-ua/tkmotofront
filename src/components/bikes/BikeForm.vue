@@ -63,13 +63,13 @@
             <v-slide-x-reverse-transition>
             </v-slide-x-reverse-transition>
             <template v-if="this.$route.params.id == 'new'">
-<!--               <v-btn
+              <v-btn
               color="primary"
               :disabled="!valid"
-              @click="save"
+              @click="create"
               >
-              SAVE PRODUCT
-              </v-btn> -->
+              SAVE BIKE
+              </v-btn>
             </template>
             <template v-if="this.$route.params.id !== 'new'">
 <!--               <v-btn
@@ -114,10 +114,10 @@ export default {
         colorLength: v => (v && v.length <= 20) || 'Color must be less than 20 characters'
       },
       valid: true,
-      hasError: false,
-      imageName: '',
-      imageUrl: '',
-      imagefile: ''
+      hasError: false
+      // imageName: '',
+      // imageUrl: '',
+      // imagefile: ''
     }
   },
   computed: {
@@ -125,31 +125,30 @@ export default {
       item: 'addItem'
     }),
     ...mapState({
-      // isAuth: 'isAuth',
       user: 'user'
     }),
     isAuth () { return this.$store.getters.isAuth }
   },
-  // methods: {
-  //   save: function () {
-  //     var params = {
-  //       formData: {
-  //         name: this.item.name,
-  //         description: this.item.description,
-  //         price: this.item.price
-  //       },
-  //       image: {
-  //         filename: this.imageName,
-  //         body: this.imageUrl
-  //       }
-  //     }
-  //     this.$store.dispatch('products/create', params)
-  //       .then(() => {
-  //         this.hasError = false
-  //         console.log(this.item)
-  //         this.$router.push({name: 'SingleAdd', params: {id: this.item.id}})
-  //       })
-  //   },
+  methods: {
+    bikeParams () {
+      var params = {
+        name: this.item.name,
+        volume: this.item.volume,
+        color: this.item.color,
+        year: this.item.year
+      }
+      return params
+    },
+
+    create: function () {
+      var params = this.bikeParams()
+      this.$store.dispatch('bike/create', params)
+        .then(() => {
+          this.hasError = false
+          console.log(this.item)
+          this.$router.push({name: '/bikes'})
+        })
+    }
   //   update: function () {
   //     var params = {
   //       id: this.item.id,
@@ -196,10 +195,6 @@ export default {
   //       this.imageUrl = ''
   //     }
   //   }
-  // },
-
-  created () {
-    // this.$store.dispatch('products/show', {id: this.$route.params.id})
   }
 }
 </script>

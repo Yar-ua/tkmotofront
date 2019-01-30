@@ -11,6 +11,10 @@ export default {
   mutations: {
     updateBikesList (state, data) {
       state.addsList = data
+    },
+    updateAddItem (state, data) {
+      state.addItem = data
+      state.addsList += data
     }
   },
 
@@ -20,7 +24,7 @@ export default {
         .then(response => {
           context.commit('updateBikesList', response.data)
         })
-    }
+    },
     // show (context, params) {
     //   if (params.id === 'new') {
     //     context.commit('updateAddItem', {id: '', name: '', description: '', price: '', image: ''})
@@ -33,12 +37,12 @@ export default {
     //       })
     //   }
     // },
-    // create (context, params) {
-    //   return axios.post(API.products, params)
-    //     .then(response => {
-    //       context.commit('updateAddItem', response.data)
-    //     })
-    // },
+    create (context, params) {
+      return axios.post(API.bikesCreate, params)
+        .then(response => {
+          context.commit('updateAddItem', response.data)
+        })
+    }
     // update (context, params) {
     //   return axios.put(API.product(params.id), params)
     // },

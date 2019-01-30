@@ -6,7 +6,9 @@ export default {
   sign_in: process.env.apiUrl + '/auth/sign_in',
   sign_out: process.env.apiUrl + '/auth/sign_out',
   // GET bikes index
-  bikesIndex: process.env.apiUrl + '/bikes'
+  bikesIndex: process.env.apiUrl + '/bikes',
+  // POST bikes create
+  bikesCreate: process.env.apiUrl + '/bikes'
   /* GET /logout */
   // logout: process.env.apiUrl + '/logout',
   /* POST /register */
