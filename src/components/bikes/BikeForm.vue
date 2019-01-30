@@ -145,8 +145,7 @@ export default {
       this.$store.dispatch('bike/create', params)
         .then(() => {
           this.hasError = false
-          console.log(this.item)
-          this.$router.push({name: '/bikes'})
+          this.$router.push({name: 'Bikes'})
         })
     }
   //   update: function () {

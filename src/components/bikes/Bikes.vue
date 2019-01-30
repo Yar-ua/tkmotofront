@@ -43,7 +43,11 @@
                 </v-layout>
                 <v-divider light></v-divider>
                 <v-card-actions class="pa-3">
-                  Rate this album
+                  <v-btn
+                    block
+                    color="secondary"
+                    dark
+                    :to="{name: 'BikeItem', params: {id: item.id}}">MORE</v-btn>
                   <v-spacer></v-spacer>
                   <v-icon>star_border</v-icon>
                   <v-icon>star_border</v-icon>

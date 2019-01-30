@@ -9,12 +9,14 @@ export default {
   },
 
   mutations: {
-    updateBikesList (state, data) {
+    setBikesList (state, data) {
       state.addsList = data
+    },
+    updateBikesList (state, data) {
+      state.addsList += data
     },
     updateAddItem (state, data) {
       state.addItem = data
-      state.addsList += data
     }
   },
 
@@ -22,7 +24,13 @@ export default {
     index (context) {
       return axios.get(API.bikesIndex)
         .then(response => {
-          context.commit('updateBikesList', response.data)
+          context.commit('setBikesList', response.data)
+        })
+    },
+    show (context, params) {
+      return axios.get(API.bikesShow(params.id), '')
+        .then(response => {
+          context.commit('updateAddItem', response.data)
         })
     },
     // show (context, params) {
@@ -41,6 +49,7 @@ export default {
       return axios.post(API.bikesCreate, params)
         .then(response => {
           context.commit('updateAddItem', response.data)
+          context.commit('updateBikesList', response.data)
         })
     }
     // update (context, params) {

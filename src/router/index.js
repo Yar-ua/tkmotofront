@@ -3,11 +3,13 @@ import Router from 'vue-router'
 import Home from '@/components/Home'
 import Page404 from '@/components/Page404'
 import PageNoPermission from '@/components/PageNoPermission'
+
 import SignUp from '@/components/SignUp'
 import SignIn from '@/components/SignIn'
 
 import Bikes from '@/components/bikes/Bikes'
 import BikeForm from '@/components/bikes/BikeForm'
+import BikeItem from '@/components/bikes/BikeItem'
 
 import store from '../store'
 
@@ -41,11 +43,13 @@ export default new Router({
       component: SignIn
     },
     // bikes CRUD
+    // index
     {
       path: '/bikes',
       name: 'Bikes',
       component: Bikes
     },
+    // create, edit
     {
       path: '/bikes/:id(\\d+|new)',
       name: 'BikeForm',
@@ -57,6 +61,12 @@ export default new Router({
           next('/no_permission')
         }
       }
+    },
+    // show
+    {
+      path: '/bikes/:id(\\d+)/show',
+      name: 'BikeItem',
+      component: BikeItem
     }
   ]
 })

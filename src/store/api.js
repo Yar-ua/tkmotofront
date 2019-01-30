@@ -8,7 +8,9 @@ export default {
   // GET bikes index
   bikesIndex: process.env.apiUrl + '/bikes',
   // POST bikes create
-  bikesCreate: process.env.apiUrl + '/bikes'
+  bikesCreate: process.env.apiUrl + '/bikes',
+  // GET bikes show
+  bikesShow: (bikeId) => (process.env.apiUrl + '/bikes/#{id}').replace('#{id}', bikeId)
   /* GET /logout */
   // logout: process.env.apiUrl + '/logout',
   /* POST /register */

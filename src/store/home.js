@@ -17,7 +17,7 @@ export default {
     home (context) {
       return axios.get(API.home)
         .then(response => {
-          context.commit('setData', response)
+          context.commit('setData', response.data)
         })
     },
     about (context) {
