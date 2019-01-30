@@ -64,13 +64,14 @@ export default {
   data: () => ({
     drawer: false
   }),
+
   computed: {
     ...mapState({
-      // isAuth: 'isAuth',
       user: 'user'
     }),
     isAuth () { return this.$store.getters.isAuth }
   },
+
   methods: {
     logoutAction: function () {
       this.$store.dispatch('sign_out', '')

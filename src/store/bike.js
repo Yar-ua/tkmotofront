@@ -10,7 +10,7 @@ export default {
 
   mutations: {
     updateBikesList (state, data) {
-      state.bikesList = data
+      state.addsList = data
     }
   },
 

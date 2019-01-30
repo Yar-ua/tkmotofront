@@ -4,6 +4,7 @@ import axios from 'axios'
 
 import API from './api'
 import bike from './bike'
+import home from './home'
 
 Vue.use(Vuex)
 
@@ -30,7 +31,8 @@ const Store = new Vuex.Store({
   },
 
   modules: {
-    bike
+    bike,
+    home
   },
 
   mutations: {
@@ -71,24 +73,6 @@ const Store = new Vuex.Store({
   },
 
   actions: {
-    home (context) {
-      return axios.get(API.home)
-        .then(response => {
-          context.commit('setData', response)
-        })
-    },
-    about (context) {
-      return axios.get(API.about)
-        .then(response => {
-          context.commit('setData', response.data)
-        })
-    },
-    secure (context) {
-      return axios.get(API.secure)
-        .then(response => {
-          context.commit('setData', response.data)
-        })
-    },
     sign_up (context, params) {
       return axios.post(API.sign_up, params)
         .then(response => {

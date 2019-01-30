@@ -47,14 +47,14 @@ export default {
     }
   },
   computed: {
-    ...mapState({
+    ...mapState('home', {
       data: 'data'
     })
   },
 
   methods: {
     homeAction: function () {
-      this.$store.dispatch('home', '')
+      this.$store.dispatch('home/home', '')
         .then(response => {
           alert(response.status)
         })
@@ -65,7 +65,7 @@ export default {
         })
     },
     aboutAction: function () {
-      this.$store.dispatch('about', '')
+      this.$store.dispatch('home/about', '')
         .catch(err => {
           if (err.response.status !== 200) {
             this.hasError = true
@@ -73,7 +73,7 @@ export default {
         })
     },
     secureAction: function () {
-      this.$store.dispatch('secure', '')
+      this.$store.dispatch('home/secure', '')
         .catch(err => {
           if (err !== 200) {
             // this.hasError = true,
@@ -82,6 +82,10 @@ export default {
           }
         })
     }
+  },
+
+  created () {
+    this.homeAction()
   }
 }
 </script>
