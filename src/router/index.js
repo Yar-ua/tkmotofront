@@ -64,7 +64,7 @@ export default new Router({
     },
     // show
     {
-      path: '/bikes/:id(\\d+)/show',
+      path: '/bikes/:id(\\d+)' + '/show',
       name: 'BikeItem',
       component: BikeItem
     }

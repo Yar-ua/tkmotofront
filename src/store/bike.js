@@ -22,41 +22,32 @@ export default {
 
   actions: {
     index (context) {
-      return axios.get(API.bikesIndex)
+      return axios.get(API.bikes)
         .then(response => {
           context.commit('setBikesList', response.data)
         })
     },
     show (context, params) {
-      return axios.get(API.bikesShow(params.id), '')
+      return axios.get(API.bike(params.id), '')
         .then(response => {
           context.commit('updateAddItem', response.data)
         })
     },
-    // show (context, params) {
-    //   if (params.id === 'new') {
-    //     context.commit('updateAddItem', {id: '', name: '', description: '', price: '', image: ''})
-    //   } else {
-    //     return axios.get(API.product(params.id), '')
-    //       .then(response => {
-    //         let editedItem = {}
-    //         Object.assign(editedItem, response.data)
-    //         context.commit('updateAddItem', editedItem)
-    //       })
-    //   }
-    // },
     create (context, params) {
-      return axios.post(API.bikesCreate, params)
+      return axios.post(API.bikes, params)
         .then(response => {
           context.commit('updateAddItem', response.data)
           context.commit('updateBikesList', response.data)
         })
+    },
+    update (context, params) {
+      return axios.put(API.bike(params.id), params)
+        .then(response => {
+          context.commit('updateAddItem', response.data)
+        })
+    },
+    delete (context, params) {
+      return axios.delete(API.bike(params.id), '')
     }
-    // update (context, params) {
-    //   return axios.put(API.product(params.id), params)
-    // },
-    // delete (context, params) {
-    //   return axios.delete(API.product(params.id), '')
-    // }
   }
 }

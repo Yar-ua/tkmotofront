@@ -5,6 +5,18 @@
         <v-form ref="form" v-model="valid" lazy-validation enctype="multipart/form-data">
           <v-toolbar color="grey darken-3">
             <v-toolbar-title class="white--text">Bike information</v-toolbar-title>
+              <v-spacer>
+                <v-flex xs12 sm6 class="py-2">
+                </v-flex>
+              </v-spacer>
+              <template v-if="(user.id == item.user_id)">
+                <v-btn
+                  color="red darken-3"
+                  :to="{name: 'BikeForm', params: {id: item.id}}"
+                >
+                  Edit bike
+                </v-btn>
+            </template>
             <v-spacer></v-spacer>
           </v-toolbar>
           <v-card-text>
@@ -12,8 +24,8 @@
             <v-layout row wrap>
             <v-flex justify-start xs6>
               <p>Name: {{ item.name }}</p>
-              <p>Engine volume: {{ item.volume }}</p>
-              <p>Color: {{ item.color }} $</p>
+              <p>Engine volume: {{ item.volume }} ccm3</p>
+              <p>Color: {{ item.color }}</p>
               <p>Year: {{ item.year }}</p>
             </v-flex>
             <v-flex>

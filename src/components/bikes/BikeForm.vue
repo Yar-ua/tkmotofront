@@ -72,20 +72,20 @@
               </v-btn>
             </template>
             <template v-if="this.$route.params.id !== 'new'">
-<!--               <v-btn
+              <v-btn
               color="primary"
               :disabled="!valid"
               @click="update"
               >
-              UPDATE PRODUCT
+              UPDATE BIKE
               </v-btn>
               <v-btn
               color="error"
               :disabled="!valid"
               @click="destroy"
               >
-              DELETE PRODUCT
-              </v-btn> -->
+              DELETE BIKE
+              </v-btn>
             </template>
           </v-card-actions>
         </v-form>
@@ -139,39 +139,42 @@ export default {
       }
       return params
     },
+    confirmDelete () {
+      if (confirm('Are You sure? Your bike and all information will be destroyed')) {
+        var bikeName = prompt('Enter Your bike name for destroy confirmation', 'sample bikename')
+        if (bikeName === this.item.name) {
+          return true
+        } else {
+          alert('Mistake in inputed bike name')
+          return false
+        }
+      }
+    },
 
     create: function () {
       var params = this.bikeParams()
       this.$store.dispatch('bike/create', params)
         .then(() => {
           this.hasError = false
-          this.$router.push({name: 'Bikes'})
+          this.$router.push({name: 'BikeItem', params: {id: this.item.id}})
         })
+    },
+    update: function () {
+      var params = this.bikeParams()
+      params.id = this.item.id
+      this.$store.dispatch('bike/update', params)
+        .then(() => {
+          this.$router.push({name: 'BikeItem', params: {id: this.item.id}})
+        })
+    },
+    destroy: function () {
+      if (this.confirmDelete() === true) {
+        this.$store.dispatch('bike/delete', {id: this.item.id})
+          .then(() => {
+            this.$router.push({name: 'Bikes'})
+          })
+      }
     }
-  //   update: function () {
-  //     var params = {
-  //       id: this.item.id,
-  //       formData: {
-  //         name: this.item.name,
-  //         description: this.item.description,
-  //         price: this.item.price
-  //       },
-  //       image: {
-  //         filename: this.imageName,
-  //         body: this.imageUrl
-  //       }
-  //     }
-  //     this.$store.dispatch('products/update', params)
-  //       .then(() => {
-  //         this.$router.push({name: 'SingleAdd', params: {id: this.item.id}})
-  //       })
-  //   },
-  //   destroy: function () {
-  //     this.$store.dispatch('products/delete', {id: this.item.id})
-  //       .then(() => {
-  //         this.$router.push({name: 'AddsList'})
-  //       })
-  //   },
   //   pickFile () {
   //     this.$refs.image.click()
   //   },

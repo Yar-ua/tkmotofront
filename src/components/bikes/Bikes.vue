@@ -28,7 +28,8 @@
                     <v-card-title primary-title>
                       <div>
                         <div class="headline">{{ item.name }}</div>
-                        <div>Mileage: {{ item.volume }}</div>
+                        <div>Engine volume: {{ item.volume }} ccm3</div>
+                        <div>Color: {{ item.color }}</div>
                         <div>Year: {{ item.year }}</div>
                       </div>
                     </v-card-title>
