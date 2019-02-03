@@ -1,14 +1,20 @@
 <template>
   <div class="hello">
+
+  <template v-if="hasError === true">
     <v-alert
-      v-model="alert"
+      :value="true"
       dismissible
-      type="error"
+      type="success"
     >
-      {{ alertText }}
+      {{ errors }}
     </v-alert>
+  </template>
+
     <h1>{{ msg }}</h1>
     <h1>{{ data }}</h1>
+    err: {{ errors }}
+    haserr: {{ hasError }}
     <div>
     <v-btn
       color="primary"
@@ -43,12 +49,14 @@ export default {
     return {
       msg: 'My home page',
       alert: false,
-      alertText: ''
+      alertType: 'success',
+      hasError: false
     }
   },
   computed: {
     ...mapState('home', {
-      data: 'data'
+      data: 'data',
+      errors: 'errors'
     })
   },
 
@@ -56,31 +64,27 @@ export default {
     homeAction: function () {
       this.$store.dispatch('home/home', '')
         .then(response => {
-          alert(response.status)
-        })
-        .catch(err => {
-          if (err.response.status !== 200) {
-            this.hasError = true
-          }
+          this.checkIfErrors()
         })
     },
     aboutAction: function () {
       this.$store.dispatch('home/about', '')
-        .catch(err => {
-          if (err.response.status !== 200) {
-            this.hasError = true
-          }
+        .then(response => {
+          this.checkIfErrors()
         })
     },
     secureAction: function () {
       this.$store.dispatch('home/secure', '')
-        .catch(err => {
-          if (err !== 200) {
-            // this.hasError = true,
-            this.alert = true
-            this.alertText = err.response.statusText
-          }
+        .then(response => {
+          this.checkIfErrors()
         })
+    },
+    checkIfErrors () {
+      if (this.errors !== null) {
+        this.hasError = true
+      } else {
+        this.hasError = false
+      }
     }
   },
 
