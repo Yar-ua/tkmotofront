@@ -2,19 +2,20 @@
   <div class="hello">
 
   <template v-if="hasError === true">
-    <v-alert
+    <v-alert v-for="error in errors" :key="error"
       :value="true"
       dismissible
-      type="success"
+      type="error"
     >
-      {{ errors }}
+      {{ error }}
     </v-alert>
   </template>
 
     <h1>{{ msg }}</h1>
     <h1>{{ data }}</h1>
     err: {{ errors }}
-    haserr: {{ hasError }}
+    haserr: {{ hasError }}<br/>
+    alerts: {{ alerts }}
     <div>
     <v-btn
       color="primary"
@@ -55,8 +56,11 @@ export default {
   },
   computed: {
     ...mapState('home', {
-      data: 'data',
-      errors: 'errors'
+      data: 'data'
+    }),
+    ...mapState('errors', {
+      errors: 'errors',
+      alerts: 'alerts'
     })
   },
 

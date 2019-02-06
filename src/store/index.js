@@ -5,6 +5,7 @@ import axios from 'axios'
 import API from './api'
 import bike from './bike'
 import home from './home'
+import errors from './errors'
 
 Vue.use(Vuex)
 
@@ -32,7 +33,8 @@ const Store = new Vuex.Store({
 
   modules: {
     bike,
-    home
+    home,
+    errors
   },
 
   mutations: {
