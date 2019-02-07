@@ -113,6 +113,17 @@ axios.interceptors.request.use(function (config) {
   return Promise.reject(error)
 })
 
+// Add a response interceptor
+axios.interceptors.response.use(function (response) {
+  Store.commit('errors/setAlerts', response.data.alerts)
+  Store.commit('errors/setErrors', response.data.errors)
+  return response
+}, function (error) {
+  Store.commit('errors/setAlerts', error.response.data.alerts)
+  Store.commit('errors/setErrors', error.response.data.errors)
+  return Promise.reject(error)
+})
+
 function setTokensInHeaders (config) {
   config.headers.common['access-token'] = localStorage.accessToken
   config.headers.common['client'] = localStorage.client

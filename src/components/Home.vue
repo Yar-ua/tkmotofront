@@ -13,9 +13,10 @@
 
     <h1>{{ msg }}</h1>
     <h1>{{ data }}</h1>
-    err: {{ errors }}
+    error: {{ errors }}<br/>
     haserr: {{ hasError }}<br/>
-    alerts: {{ alerts }}
+    alerts: {{ alerts }}<br/>
+    hasalert: {{ hasAlert }}<br/>
     <div>
     <v-btn
       color="primary"
@@ -51,7 +52,8 @@ export default {
       msg: 'My home page',
       alert: false,
       alertType: 'success',
-      hasError: false
+      hasError: false,
+      hasAlert: false
     }
   },
   computed: {
@@ -84,11 +86,20 @@ export default {
         })
     },
     checkIfErrors () {
-      if (this.errors !== null) {
+      if (this.alerts.length !== 0) {
+        this.hasAlert = true
+      } else {
+        this.hasAlert = false
+      }
+
+      if (this.errors.length !== 0) {
         this.hasError = true
       } else {
         this.hasError = false
       }
+
+      console.log(this.errors)
+      console.log(this.alerts)
     }
   },
 
