@@ -11,7 +11,7 @@
     </v-alert>
   </template>
 
-  <template>
+  <template v-if="hasAlert === true">
     <v-alert v-for="(value, key) in alerts[0]" :key="key"
       :value="true"
       dismissible
@@ -24,7 +24,6 @@
     <h1>{{ msg }}</h1>
     <h1>{{ data }}</h1>
     error: {{ errors }}<br/>
-    <!-- haserr: {{ hasError }}<br/> -->
     alerts: {{ alerts }}<br/>
     hasalert: {{ hasAlert }}<br/>
     <div>
