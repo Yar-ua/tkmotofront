@@ -1,7 +1,7 @@
 <template>
   <div class="hello">
 
-  <template v-if="hasError === true">
+  <template>
     <v-alert v-for="error in errors" :key="error"
       :value="true"
       dismissible
@@ -11,10 +11,20 @@
     </v-alert>
   </template>
 
+  <template>
+    <v-alert v-for="(value, key) in alerts[0]" :key="key"
+      :value="true"
+      dismissible
+      :type="key"
+    >
+      {{ value }}
+    </v-alert>
+  </template>
+
     <h1>{{ msg }}</h1>
     <h1>{{ data }}</h1>
     error: {{ errors }}<br/>
-    haserr: {{ hasError }}<br/>
+    <!-- haserr: {{ hasError }}<br/> -->
     alerts: {{ alerts }}<br/>
     hasalert: {{ hasAlert }}<br/>
     <div>
@@ -52,7 +62,7 @@ export default {
       msg: 'My home page',
       alert: false,
       alertType: 'success',
-      hasError: false,
+      // hasError: false,
       hasAlert: false
     }
   },
@@ -91,15 +101,11 @@ export default {
       } else {
         this.hasAlert = false
       }
-
-      if (this.errors.length !== 0) {
-        this.hasError = true
-      } else {
-        this.hasError = false
-      }
-
-      console.log(this.errors)
-      console.log(this.alerts)
+      // if (this.errors !== '') {
+      //   this.hasError = true
+      // } else {
+      //   this.hasError = false
+      // }
     }
   },
 

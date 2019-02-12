@@ -1,10 +1,8 @@
 export default {
   namespaced: true,
   state: {
-    errors: {},
-    alerts: {},
-    hasError: false,
-    hasAlert: false
+    errors: [],
+    alerts: {}
   },
 
   mutations: {
@@ -13,10 +11,6 @@ export default {
     },
     setAlerts (state, alerts) {
       state.alerts = alerts
-    },
-    setHasAlert (state, bool) {
-      console.log('aaa')
-      state.hasAlert = bool
     }
   }
 
