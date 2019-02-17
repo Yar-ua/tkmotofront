@@ -28,7 +28,7 @@ export default {
     }
   },
   computed: {
-    ...mapState('errors', {
+    ...mapState('alerts', {
       alerts: 'alerts'
     })
   }

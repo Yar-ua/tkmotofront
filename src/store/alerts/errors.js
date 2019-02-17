@@ -1,16 +1,12 @@
 export default {
   namespaced: true,
   state: {
-    errors: [],
-    alerts: {}
+    errors: []
   },
 
   mutations: {
     setErrors (state, errors) {
       state.errors = errors
-    },
-    setAlerts (state, alerts) {
-      state.alerts = alerts
     }
   }
 

@@ -5,7 +5,8 @@ import axios from 'axios'
 import API from './api'
 import bike from './bike'
 import home from './home'
-import errors from './errors'
+import errors from './alerts/errors'
+import alerts from './alerts/alerts'
 
 Vue.use(Vuex)
 
@@ -34,7 +35,8 @@ const Store = new Vuex.Store({
   modules: {
     bike,
     home,
-    errors
+    errors,
+    alerts
   },
 
   mutations: {
@@ -115,11 +117,11 @@ axios.interceptors.request.use(function (config) {
 
 // Add a response interceptor
 axios.interceptors.response.use(function (response) {
-  Store.commit('errors/setAlerts', response.data.alerts)
+  Store.commit('alerts/setAlerts', response.data.alerts)
   Store.commit('errors/setErrors', response.data.errors)
   return response
 }, function (error) {
-  Store.commit('errors/setAlerts', error.response.data.alerts)
+  Store.commit('alerts/setAlerts', error.response.data.alerts)
   Store.commit('errors/setErrors', error.response.data.errors)
   return Promise.reject(error)
 })

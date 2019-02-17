@@ -1,6 +1,5 @@
 import axios from 'axios'
 import API from './api'
-import errors from './errors'
 
 export default {
   namespaced: true,
@@ -12,10 +11,6 @@ export default {
     setData (state, data) {
       state.data = data
     }
-  },
-
-  modules: {
-    errors
   },
 
   actions: {

@@ -23,8 +23,8 @@
 <script>
 
 import Header from '@/components/Header'
-import Errors from '@/components/Errors'
-import Alerts from '@/components/Alerts'
+import Errors from '@/components/alerts/Errors'
+import Alerts from '@/components/alerts/Alerts'
 
 export default {
   name: 'App',

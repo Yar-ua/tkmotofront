@@ -27,6 +27,7 @@
                   <v-flex xs7>
                     <v-card-title primary-title>
                       <div>
+                        ID: {{ item.id }}
                         <div class="headline">{{ item.name }}</div>
                         <div>Engine volume: {{ item.volume }} ccm3</div>
                         <div>Color: {{ item.color }}</div>
@@ -48,7 +49,9 @@
                     block
                     color="secondary"
                     dark
-                    :to="{name: 'BikeItem', params: {id: item.id}}">MORE</v-btn>
+                    :to="{name: 'BikeItem', params: {id: item.id}}"
+                    >{{item.id}}=MORE
+                  </v-btn>
                   <v-spacer></v-spacer>
                   <v-icon>star_border</v-icon>
                   <v-icon>star_border</v-icon>
@@ -89,8 +92,6 @@ export default {
     isAuth () { return this.$store.getters.isAuth }
   },
 
-  // methods: {
-  // }
   created () {
     this.$store.dispatch('bike/index', '')
       .catch(err => {

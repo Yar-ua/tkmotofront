@@ -4,7 +4,7 @@
       <v-card>
         <v-form ref="form" v-model="valid" lazy-validation enctype="multipart/form-data">
           <v-toolbar color="grey darken-3">
-            <v-toolbar-title class="white--text">Create or update bike</v-toolbar-title>
+            <v-toolbar-title class="white--text">BikeForm: Create or update bike</v-toolbar-title>
             <v-spacer></v-spacer>
           </v-toolbar>
           <v-card-text>

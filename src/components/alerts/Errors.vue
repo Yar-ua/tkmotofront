@@ -20,9 +20,9 @@ export default {
     return {
       hasErrors: () => {
         if (this.errors.length !== 0) {
-          console.log(true)
+          return true
         } else {
-          console.log(false)
+          return false
         }
       }
     }

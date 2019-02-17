@@ -24,26 +24,29 @@ export default {
     index (context) {
       return axios.get(API.bikes)
         .then(response => {
-          context.commit('setBikesList', response.data)
+          context.commit('setBikesList', response.data.data)
         })
     },
     show (context, params) {
       return axios.get(API.bike(params.id), '')
         .then(response => {
-          context.commit('updateAddItem', response.data)
+          context.commit('updateAddItem', response.data.data)
         })
     },
     create (context, params) {
       return axios.post(API.bikes, params)
         .then(response => {
-          context.commit('updateAddItem', response.data)
-          context.commit('updateBikesList', response.data)
+          context.commit('updateAddItem', response.data.data)
+          context.commit('updateBikesList', response.data.data)
+          // if (response.status === 200) {
+
+          // }
         })
     },
     update (context, params) {
       return axios.put(API.bike(params.id), params)
         .then(response => {
-          context.commit('updateAddItem', response.data)
+          context.commit('updateAddItem', response.data.data)
         })
     },
     delete (context, params) {
