@@ -25,6 +25,7 @@ export default {
       return axios.get(API.bikes)
         .then(response => {
           context.commit('setBikesList', response.data.data)
+          context.commit('updateAddItem', {})
         })
     },
     show (context, params) {
@@ -38,9 +39,6 @@ export default {
         .then(response => {
           context.commit('updateAddItem', response.data.data)
           context.commit('updateBikesList', response.data.data)
-          // if (response.status === 200) {
-
-          // }
         })
     },
     update (context, params) {
