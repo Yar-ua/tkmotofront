@@ -46,21 +46,12 @@ export default {
   methods: {
     homeAction: function () {
       this.$store.dispatch('home/home', '')
-        .then(response => {
-          this.checkIfErrors()
-        })
     },
     aboutAction: function () {
       this.$store.dispatch('home/about', '')
-        .then(response => {
-          this.checkIfErrors()
-        })
     },
     secureAction: function () {
       this.$store.dispatch('home/secure', '')
-        .then(response => {
-          this.checkIfErrors()
-        })
     }
   },
 

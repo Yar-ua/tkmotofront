@@ -9,6 +9,7 @@
           <v-flex>
           <app-errors></app-errors>
           <app-alerts></app-alerts>
+          <FlashMessage></FlashMessage>
             <router-view/>
           </v-flex>
         </v-layout>

@@ -20,6 +20,9 @@ export default {
         .then(response => {
           context.commit('setData', response.data.data)
         })
+        .catch(err => {
+          console.log(err.response.status + ', ' + err.response.textMessage)
+        })
     },
 
     about (context) {
@@ -27,12 +30,18 @@ export default {
         .then(response => {
           context.commit('setData', response.data.data)
         })
+        .catch(err => {
+          console.log(err.response.status + ', ' + err.response.textMessage)
+        })
     },
 
     secure (context) {
       return axios.get(API.secure)
         .then(response => {
           context.commit('setData', response.data.data)
+        })
+        .catch(err => {
+          console.log(err.response.status + ', ' + err.response.textMessage)
         })
     }
   }

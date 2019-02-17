@@ -1,12 +1,6 @@
 <template>
   <div>
-    <v-alert v-for="error in errors" :key="error"
-    :value="true"
-    dismissible
-    type="error"
-    >
-      {{ error }}
-    </v-alert>
+    haserror: {{ hasErrors() }}
   </div>
 </template>
 
@@ -31,6 +25,13 @@ export default {
     ...mapState('errors', {
       errors: 'errors'
     })
+  },
+  watch: {
+    errors: function () {
+      if (this.hasErrors() === true) {
+        this.flashMessage.show({status: 'error', title: 'Error', message: this.errors[0]})
+      }
+    }
   }
 }
 </script>

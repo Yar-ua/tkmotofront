@@ -1,12 +1,6 @@
 <template>
-  <div v-if="hasAlert() === true">
-    <v-alert v-for="(value, key) in alerts[0]" :key="key"
-      :value="true"
-      dismissible
-      :type="key"
-    >
-      {{ value }}
-    </v-alert>
+  <div>
+    hasAlerts: {{ hasAlert() }}
   </div>
 </template>
 
@@ -31,6 +25,24 @@ export default {
     ...mapState('alerts', {
       alerts: 'alerts'
     })
+  },
+  watch: {
+    alerts: function () {
+      if (this.hasAlert() === true) {
+        this.showAlerts(this.alerts[0])
+      }
+    }
+  },
+  methods: {
+    showAlerts: function (array) {
+      for (var key in array) {
+        this.flashMessage.show({
+          status: key,
+          title: key[0].toUpperCase() + key.slice(1),
+          message: array[key]
+        })
+      }
+    }
   }
 }
 </script>
