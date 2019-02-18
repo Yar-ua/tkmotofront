@@ -73,9 +73,19 @@ export default {
       this.$store.dispatch('sign_in', {email: this.email, password: this.password})
         .then(() => {
           this.hasError = false
+          this.flashMessage.show({
+            status: 'success',
+            title: 'Success',
+            message: 'You signed in',
+          })
           this.$router.push({name: 'Home'})
         }).catch(err => {
           if (err.response.status !== 200) {
+            this.flashMessage.show({
+              status: 'error',
+              title: 'Error',
+              message: err.response.data.errors,
+            })
             this.hasError = true
           }
         })

@@ -77,6 +77,11 @@ export default {
       this.$store.dispatch('sign_out', '')
         .then(() => {
           this.$router.push({name: 'Home'})
+          this.flashMessage.show({
+            status: 'success',
+            title: 'Success',
+            message: 'You logouted cussessfully',
+          })
         }).catch(err => {
           if (err.response.status !== 200) {
             this.hasError = true

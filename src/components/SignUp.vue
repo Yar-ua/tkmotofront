@@ -100,10 +100,20 @@ export default {
         this.$store.dispatch('sign_up', {name: this.login, email: this.email, password: this.password})
           .then(() => {
             this.hasError = false
+            this.flashMessage.show({
+              status: 'success',
+              title: 'Success',
+              message: 'You successfully registred already',
+            })
             this.$router.push({name: 'Home'})
           }).catch(err => {
             if (err.response.status !== 200) {
               this.hasError = true
+              this.flashMessage.show({
+                status: 'error',
+                title: 'Error',
+                message: 'You are not registred',
+              })              
             }
           })
       }
