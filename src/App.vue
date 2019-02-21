@@ -1,17 +1,22 @@
 <template>
   <v-app id="inspire" dark>
+
     <app-header></app-header>
+
     <v-content>
       <v-container fluid fill-height>
         <v-layout justify-center align-center>
           <v-flex>
+          <app-errors></app-errors>
+          <app-alerts></app-alerts>
+          <FlashMessage></FlashMessage>
             <router-view/>
           </v-flex>
         </v-layout>
       </v-container>
     </v-content>
     <v-footer app fixed>
-      <span>&copy; Yar-ua 2018</span>
+      <span>&copy; Yar-ua 2019</span>
     </v-footer>
   </v-app>
 </template>
@@ -19,12 +24,16 @@
 <script>
 
 import Header from '@/components/Header'
+import Errors from '@/components/alerts/Errors'
+import Alerts from '@/components/alerts/Alerts'
 
 export default {
   name: 'App',
   drawer: false,
   components: {
-    'app-header': Header
+    'app-header': Header,
+    'app-errors': Errors,
+    'app-alerts': Alerts
   },
   props: {
     source: String

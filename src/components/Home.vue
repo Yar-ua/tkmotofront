@@ -1,33 +1,26 @@
 <template>
   <div class="hello">
-    <v-alert
-      v-model="alert"
-      dismissible
-      type="error"
-    >
-      {{ alertText }}
-    </v-alert>
     <h1>{{ msg }}</h1>
     <h1>{{ data }}</h1>
     <div>
-    <v-btn
-      color="primary"
-      @click="homeAction"
-    >
-      home
-    </v-btn>
-    <v-btn
-      color="primary"
-      @click="aboutAction"
-    >
-      about
-    </v-btn>
-    <v-btn
-      color="primary"
-      @click="secureAction"
-    >
-      secure
-    </v-btn>
+      <v-btn
+        color="primary"
+        @click="homeAction"
+      >
+        home
+      </v-btn>
+      <v-btn
+        color="primary"
+        @click="aboutAction"
+      >
+        about
+      </v-btn>
+      <v-btn
+        color="primary"
+        @click="secureAction"
+      >
+        secure
+      </v-btn>
     </div>
   </div>
 </template>
@@ -41,48 +34,29 @@ export default {
   body: '',
   data () {
     return {
-      msg: 'My home page',
-      alert: false,
-      alertText: ''
+      msg: 'My home page'
     }
   },
   computed: {
-    ...mapState({
+    ...mapState('home', {
       data: 'data'
     })
   },
 
   methods: {
     homeAction: function () {
-      this.$store.dispatch('home', '')
-        .then(response => {
-          alert(response.status)
-        })
-        .catch(err => {
-          if (err.response.status !== 200) {
-            this.hasError = true
-          }
-        })
+      this.$store.dispatch('home/home', '')
     },
     aboutAction: function () {
-      this.$store.dispatch('about', '')
-        .catch(err => {
-          if (err.response.status !== 200) {
-            this.hasError = true
-          }
-        })
+      this.$store.dispatch('home/about', '')
     },
     secureAction: function () {
-      this.$store.dispatch('secure', '')
-        .catch(err => {
-          if (err !== 200) {
-            // this.hasError = true,
-            console.log(err.response.statusText)
-            this.alert = true
-            this.alertText = err.response.statusText
-          }
-        })
+      this.$store.dispatch('home/secure', '')
     }
+  },
+
+  created () {
+    this.homeAction()
   }
 }
 </script>

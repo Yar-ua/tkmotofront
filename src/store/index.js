@@ -3,6 +3,10 @@ import Vuex from 'vuex'
 import axios from 'axios'
 
 import API from './api'
+import bike from './bike'
+import home from './home'
+import errors from './alerts/errors'
+import alerts from './alerts/alerts'
 
 Vue.use(Vuex)
 
@@ -17,7 +21,22 @@ const Store = new Vuex.Store({
       bearer: localStorage.bearer ? localStorage.bearer : '',
       uid: localStorage.uid ? localStorage.uid : ''
     },
-    user: {}
+    user: {
+      id: localStorage.id ? localStorage.id : null,
+      user: localStorage.user ? localStorage.user : null,
+      email: localStorage.email ? localStorage.email : null
+    }
+  },
+
+  getters: {
+    isAuth: state => state.isAuth
+  },
+
+  modules: {
+    bike,
+    home,
+    errors,
+    alerts
   },
 
   mutations: {
@@ -42,41 +61,22 @@ const Store = new Vuex.Store({
       localStorage.accessToken = headers['access-token']
       localStorage.client = headers['client']
       localStorage.expiry = headers['expiry']
-      localStorage.bearer = headers['Bearer']
+      localStorage.tokenType = headers['token-type']
       localStorage.uid = headers['uid']
       state.tokens = {
         accessToken: headers['access-token'],
         client: headers['client'],
         expiry: headers['expiry'],
-        bearer: headers['Bearer'],
+        bearer: headers['token-type'],
         uid: headers['uid']
       }
     },
     clearLocalStorage () {
-      console.log('clearLocalStorage')
-      // localStorage.clear()
+      localStorage.clear()
     }
   },
 
   actions: {
-    home (context) {
-      return axios.get(API.home)
-        .then(response => {
-          context.commit('setData', response)
-        })
-    },
-    about (context) {
-      return axios.get(API.about)
-        .then(response => {
-          context.commit('setData', response.data)
-        })
-    },
-    secure (context) {
-      return axios.get(API.secure)
-        .then(response => {
-          context.commit('setData', response.data)
-        })
-    },
     sign_up (context, params) {
       return axios.post(API.sign_up, params)
         .then(response => {
@@ -115,11 +115,22 @@ axios.interceptors.request.use(function (config) {
   return Promise.reject(error)
 })
 
+// Add a response interceptor
+axios.interceptors.response.use(function (response) {
+  Store.commit('alerts/setAlerts', response.data.alerts)
+  Store.commit('errors/setErrors', response.data.errors)
+  return response
+}, function (error) {
+  Store.commit('alerts/setAlerts', error.response.data.alerts)
+  Store.commit('errors/setErrors', error.response.data.errors)
+  return Promise.reject(error)
+})
+
 function setTokensInHeaders (config) {
   config.headers.common['access-token'] = localStorage.accessToken
   config.headers.common['client'] = localStorage.client
   config.headers.common['expiry'] = localStorage.expiry
-  config.headers.common['Bearer'] = localStorage.bearer
+  config.headers.common['token-type'] = localStorage.tokenType
   config.headers.common['uid'] = localStorage.uid
   return config
 }
