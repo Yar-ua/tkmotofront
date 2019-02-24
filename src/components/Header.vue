@@ -80,7 +80,7 @@ export default {
           this.flashMessage.show({
             status: 'success',
             title: 'Success',
-            message: 'You logouted cussessfully',
+            message: 'You logouted cussessfully'
           })
         }).catch(err => {
           if (err.response.status !== 200) {

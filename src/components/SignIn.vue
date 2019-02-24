@@ -76,7 +76,7 @@ export default {
           this.flashMessage.show({
             status: 'success',
             title: 'Success',
-            message: 'You signed in',
+            message: 'You signed in'
           })
           this.$router.push({name: 'Home'})
         }).catch(err => {
@@ -84,7 +84,7 @@ export default {
             this.flashMessage.show({
               status: 'error',
               title: 'Error',
-              message: err.response.data.errors,
+              message: err.response.data.errors
             })
             this.hasError = true
           }

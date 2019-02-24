@@ -103,7 +103,7 @@ export default {
             this.flashMessage.show({
               status: 'success',
               title: 'Success',
-              message: 'You successfully registred already',
+              message: 'You successfully registred already'
             })
             this.$router.push({name: 'Home'})
           }).catch(err => {
@@ -112,8 +112,8 @@ export default {
               this.flashMessage.show({
                 status: 'error',
                 title: 'Error',
-                message: 'You are not registred',
-              })              
+                message: 'You are not registred'
+              })
             }
           })
       }
