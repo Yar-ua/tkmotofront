@@ -100,11 +100,7 @@ export default {
   data: () => {
     return {
       dialog: false,
-      valid: true,
-      hasError: false
-      // imageName: '',
-      // imageUrl: '',
-      // imagefile: ''
+      valid: true
     }
   },
 
@@ -120,11 +116,6 @@ export default {
 
   created () {
     this.$store.dispatch('bike/show', {id: this.$route.params.id})
-      .catch(err => {
-        if (err.response.status !== 200) {
-          this.hasError = true
-        }
-      })
   }
 }
 </script>

@@ -7,11 +7,12 @@ import PageNoPermission from '@/components/PageNoPermission'
 import SignUp from '@/components/SignUp'
 import SignIn from '@/components/SignIn'
 
+// import BikesSheet from '@/components/bikes/BikesSheet'
 import Bikes from '@/components/bikes/Bikes'
-import BikeForm from '@/components/bikes/BikeForm'
+// import BikeForm from '@/components/bikes/BikeForm'
 import BikeItem from '@/components/bikes/BikeItem'
 
-import store from '../store'
+// import store from '../store'
 
 Vue.use(Router)
 
@@ -49,24 +50,11 @@ export default new Router({
       name: 'Bikes',
       component: Bikes
     },
-    // create, edit
     {
-      path: '/bikes/:id(\\d+|new)',
-      name: 'BikeForm',
-      component: BikeForm,
-      beforeEnter (to, from, next) {
-        if (store.getters.isAuth) {
-          next()
-        } else {
-          next('/no_permission')
-        }
-      }
-    },
-    // show
-    {
-      path: '/bikes/:id(\\d+)/show',
+      path: ':id(\\d+)',
       name: 'BikeItem',
       component: BikeItem
     }
+
   ]
 })

@@ -1,6 +1,5 @@
 <template>
   <div>
-    hasAlerts: {{ hasAlert() }}
   </div>
 </template>
 

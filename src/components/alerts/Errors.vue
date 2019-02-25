@@ -1,6 +1,5 @@
 <template>
   <div>
-    haserror: {{ hasErrors() }}
   </div>
 </template>
 
