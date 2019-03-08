@@ -7,9 +7,9 @@ import PageNoPermission from '@/components/PageNoPermission'
 import SignUp from '@/components/SignUp'
 import SignIn from '@/components/SignIn'
 
-// import BikesSheet from '@/components/bikes/BikesSheet'
+import BikesSheet from '@/components/bikes/BikesSheet'
 import Bikes from '@/components/bikes/Bikes'
-// import BikeForm from '@/components/bikes/BikeForm'
+import BikeForm from '@/components/bikes/BikeForm'
 import BikeItem from '@/components/bikes/BikeItem'
 
 // import store from '../store'
@@ -47,14 +47,24 @@ export default new Router({
     // index
     {
       path: '/bikes',
-      name: 'Bikes',
-      component: Bikes
-    },
-    {
-      path: ':id(\\d+)',
-      name: 'BikeItem',
-      component: BikeItem
+      component: BikesSheet,
+      children: [
+        {
+          path: '',
+          name: 'Bikes',
+          component: Bikes
+        },
+        {
+          path: ':id(\\d+)/show',
+          name: 'BikeItem',
+          component: BikeItem
+        },
+        {
+          path: ':id(\\d+|new)',
+          name: 'BikeForm',
+          component: BikeForm
+        }
+      ]
     }
-
   ]
 })

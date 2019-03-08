@@ -82,11 +82,16 @@ export default {
             title: 'Success',
             message: 'You logouted cussessfully'
           })
-        }).catch(err => {
-          if (err.response.status !== 200) {
-            this.hasError = true
-          }
         })
+        // .catch(err => {
+        //   if (err.response.status !== 200) {
+        //     this.hasError = true
+        //     if ((err.response.status === 401) || (err.response.status === 404)) {
+        //       localStorage.clear()
+        //       this.$router.push({ path: '/' })
+        //     }
+        //   }
+        // })
     }
   }
 }

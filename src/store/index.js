@@ -101,6 +101,17 @@ const Store = new Vuex.Store({
           context.commit('updateTokens', response.headers)
           context.commit('clearLocalStorage', '')
         })
+        .catch(err => {
+          if (err.response.status !== 200) {
+            this.hasError = true
+            if ((err.response.status === 401) || (err.response.status === 404)) {
+              context.commit('updateUser', {'data': {'id': '', 'name': '', 'email': ''}})
+              context.commit('updateAuth', false)
+              context.commit('updateTokens', err.response.headers)
+              context.commit('clearLocalStorage', '')
+            }
+          }
+        })
     }
   }
 })
