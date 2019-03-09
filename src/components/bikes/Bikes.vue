@@ -48,7 +48,7 @@
                 color="secondary"
                 dark
                 :to="{name: 'BikeItem', params: {id: item.id}}"
-                >{{item.id}}=MORE
+                >SHOW MORE
               </v-btn>
             </template>
             <v-spacer></v-spacer>

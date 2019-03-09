@@ -6,10 +6,13 @@ import App from './App'
 import router from './router'
 import 'vuetify/dist/vuetify.min.css' // Ensure you are using css-loader
 import FlashMessage from '@smartweb/vue-flash-message'
+import '@fortawesome/fontawesome-free/css/all.css' // Ensure you are using css-loader
 
 import store from '@/store'
 
-Vue.use(Vuetify)
+Vue.use(Vuetify, {
+  iconfont: 'fa'
+})
 Vue.use(FlashMessage, {strategy: 'multiple'})
 Vue.config.productionTip = false
 

@@ -12,7 +12,10 @@ import Bikes from '@/components/bikes/Bikes'
 import BikeForm from '@/components/bikes/BikeForm'
 import BikeItem from '@/components/bikes/BikeItem'
 
-// import store from '../store'
+import Fuels from '@/components/bikes/fuels/Fuels'
+import Repairs from '@/components/bikes/repairs/Repairs'
+
+import store from '../store'
 
 Vue.use(Router)
 
@@ -55,14 +58,33 @@ export default new Router({
           component: Bikes
         },
         {
-          path: ':id(\\d+)/show',
-          name: 'BikeItem',
-          component: BikeItem
-        },
-        {
           path: ':id(\\d+|new)',
           name: 'BikeForm',
-          component: BikeForm
+          component: BikeForm,
+          beforeEnter (to, from, next) {
+            if (store.getters.isAuth) {
+              next()
+            } else {
+              next('/no_permission')
+            }
+          }
+        },
+        {
+          path: ':id(\\d+)/show',
+          name: 'BikeItem',
+          component: BikeItem,
+          children: [
+            {
+              path: 'fuels',
+              name: 'Fuels',
+              component: Fuels
+            },
+            {
+              path: 'repairs',
+              name: 'Repairs',
+              component: Repairs
+            }
+          ]
         }
       ]
     }
