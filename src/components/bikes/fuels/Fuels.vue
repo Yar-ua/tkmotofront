@@ -1,6 +1,5 @@
 <template>
   <div>
-    {{ msg }}
     <hr/>
     <app-fuels-table></app-fuels-table>
   </div>
@@ -16,11 +15,6 @@ export default {
   body: '',
   components: {
     'app-fuels-table': FuelsTable
-  },
-  data () {
-    return {
-      msg: 'FUELS STATISTIC'
-    }
   },
 
   computed: {
