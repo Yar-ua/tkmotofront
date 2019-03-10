@@ -3,8 +3,9 @@ import Vuex from 'vuex'
 import axios from 'axios'
 
 import API from './api'
-import bike from './bike'
 import home from './home'
+import bike from './bike'
+import fuel from './fuel'
 import errors from './alerts/errors'
 import alerts from './alerts/alerts'
 
@@ -33,8 +34,9 @@ const Store = new Vuex.Store({
   },
 
   modules: {
-    bike,
     home,
+    bike,
+    fuel,
     errors,
     alerts
   },

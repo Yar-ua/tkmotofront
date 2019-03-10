@@ -72,9 +72,7 @@ export default {
   body: '',
   data () {
     return {
-      msg: 'Bikes list',
-      alert: false,
-      alertText: ''
+      msg: 'Bikes list'
     }
   },
 

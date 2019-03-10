@@ -13,5 +13,8 @@ export default {
   // GET /bike/:id (show bike)
   // PUT /bike/:id (update bike)
   // DELETE /bike/:id (delete bike)
-  bike: (bikeId) => (process.env.apiUrl + '/bikes/#{id}').replace('#{id}', bikeId)
+  bike: (bikeId) => (process.env.apiUrl + '/bikes/#{id}').replace('#{id}', bikeId),
+
+  // GET /bikes/:bike_id/fuels (index fuels)
+  fuels: (bikeId) => (process.env.apiUrl + '/bikes/#{bike_id}' + '/fuels').replace('#{bike_id}', bikeId)
 }

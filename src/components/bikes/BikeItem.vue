@@ -88,8 +88,7 @@ export default {
   data: () => {
     return {
       dialog: false,
-      valid: true,
-      active: null
+      valid: true
     }
   },
 
