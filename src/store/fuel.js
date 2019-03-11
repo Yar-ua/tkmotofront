@@ -53,7 +53,7 @@ export default {
       return axios.delete(API.fuel(params.bikeId, params.id), '')
         .then(response => {
           if (response.status === 200) {
-            context.commit('updateFuelsList', params)
+            context.commit('removeItemFromFuelsList', params)
           }
         })
     }

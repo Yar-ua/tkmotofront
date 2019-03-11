@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-toolbar flat color="grey darken-3">
-      <v-toolbar-title>Fuel Information</v-toolbar-title>
+      <v-toolbar-title>Repair Information</v-toolbar-title>
       <v-divider
         class="mx-2"
         inset
@@ -26,16 +26,13 @@
             <v-container grid-list-md>
               <v-layout wrap>
                 <v-flex xs12 sm6 md4>
-                  <v-text-field v-model="editedItem.odometer" label="Odometer, km"></v-text-field>
+                  <v-text-field v-model="editedItem.description" label="Description of repair"></v-text-field>
                 </v-flex>
                 <v-flex xs12 sm6 md4>
-                  <v-text-field v-model="editedItem.distance" label="Distance, km"></v-text-field>
+                  <v-text-field v-model="editedItem.detail" label="Changed or repaired detail"></v-text-field>
                 </v-flex>
                 <v-flex xs12 sm6 md4>
-                  <v-text-field v-model="editedItem.refueling" label="Refueling, l"></v-text-field>
-                </v-flex>
-                <v-flex xs12 sm6 md4>
-                  <v-text-field v-model="editedItem.price_fuel" label="Price, UAN"></v-text-field>
+                  <v-text-field v-model="editedItem.price_detail" label="Detail or repair cost, UAN"></v-text-field>
                 </v-flex>
               </v-layout>
             </v-container>
@@ -57,10 +54,9 @@
       no-data-text="Sorry, nothing data to display here :("
     >
       <template slot="items" slot-scope="props">
-        <td class="text-xs-left">{{ props.item.odometer }}</td>
-        <td class="text-xs-left">{{ props.item.distance }}</td>
-        <td class="text-xs-left">{{ props.item.refueling }}</td>
-        <td class="text-xs-left">{{ props.item.price_fuel }}</td>
+        <td class="text-xs-left">{{ props.item.description }}</td>
+        <td class="text-xs-left">{{ props.item.detail }}</td>
+        <td class="text-xs-left">{{ props.item.price_detail }}</td>
         <td class="justify-center layout px-0">
           <v-icon
             small
@@ -92,35 +88,32 @@ export default {
 
   data: () => ({
     dialog: false,
-    rowsPerPageItems: [10, 20, {'text': '$vuetify.dataIterator.rowsPerPageAll', 'value': -1}],
+    rowsPerPageItems: [5, 15, {'text': '$vuetify.dataIterator.rowsPerPageAll', 'value': -1}],
     headers: [
       {
-        text: 'Odometer (km)',
+        text: 'Description',
         align: 'left',
-        value: 'odometer'
+        value: 'description'
       },
-      { text: 'Distance (km)', value: 'distance' },
-      { text: 'Refueling (l)', value: 'reflueing' },
-      { text: 'Price (UAN)', value: 'price' }
+      { text: 'Detail for repair or change', value: 'detail' },
+      { text: 'Price (UAN)', value: 'price_detail' }
     ],
     newItem: {
-      odometer: 0,
-      distance: 0,
-      refueling: 0,
-      price_fuel: 0
+      description: '',
+      detail: '',
+      price_detail: 0
     },
     editedItem: {
       id: -1,
-      odometer: 0,
-      distance: 0,
-      refueling: 0,
-      price_fuel: 0
+      description: '',
+      detail: '',
+      price_detail: 0
     }
   }),
 
   computed: {
-    ...mapState('fuel', {
-      fuelsList: 'fuelsList'
+    ...mapState('repair', {
+      fuelsList: 'repairsList'
     }),
     formTitle () {
       return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
@@ -139,33 +132,32 @@ export default {
 
   methods: {
     initialize () {
-      this.$store.dispatch('fuel/index', {bikeId: this.$route.params.id})
+      this.$store.dispatch('repair/index', {bikeId: this.$route.params.id})
     },
 
-    fuelParams () {
+    repairParams () {
       var params = {
-        odometer: this.editedItem.odometer,
-        distance: this.editedItem.distance,
-        refueling: this.editedItem.refueling,
-        price_fuel: this.editedItem.price_fuel
+        description: this.editedItem.description,
+        detail: this.editedItem.detail,
+        price_detail: this.editedItem.price_detail
       }
       return params
     },
 
-    createFuel (item) {
-      this.$store.dispatch('fuel/create',
+    createRepair (item) {
+      this.$store.dispatch('repair/create',
         {
           bikeId: this.$route.params.id,
-          fuel: this.fuelParams()
+          repair: this.repairParams()
         })
     },
 
-    updateFuel (item) {
-      this.$store.dispatch('fuel/update',
+    updateRepair (item) {
+      this.$store.dispatch('repair/update',
         {
           bikeId: this.$route.params.id,
           id: this.editedItem.id,
-          fuel: this.fuelParams()
+          repair: this.repairParams()
         })
     },
 
@@ -180,7 +172,7 @@ export default {
 
     deleteItem (item) {
       if (confirm('Are you sure you want to delete this item?')) {
-        this.$store.dispatch('fuel/delete', {
+        this.$store.dispatch('repair/delete', {
           bikeId: this.$route.params.id,
           id: item.id
         })
@@ -197,9 +189,9 @@ export default {
 
     save () {
       if (this.editedItem.id) {
-        this.updateFuel(this.editedItem)
+        this.updateRepair(this.editedItem)
       } else {
-        this.createFuel(this.editedItem)
+        this.createRepair(this.editedItem)
       }
       this.close()
     }

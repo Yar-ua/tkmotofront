@@ -6,6 +6,7 @@ import API from './api'
 import home from './home'
 import bike from './bike'
 import fuel from './fuel'
+import repair from './repair'
 import errors from './alerts/errors'
 import alerts from './alerts/alerts'
 
@@ -37,6 +38,7 @@ const Store = new Vuex.Store({
     home,
     bike,
     fuel,
+    repair,
     errors,
     alerts
   },

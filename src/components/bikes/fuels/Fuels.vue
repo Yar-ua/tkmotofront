@@ -22,10 +22,6 @@ export default {
       user: 'user'
     }),
     isAuth () { return this.$store.getters.isAuth }
-  },
-
-  created () {
-    this.$store.dispatch('fuel/index', {bikeId: this.$route.params.id})
   }
 
 }
