@@ -10,8 +10,18 @@ export default {
   // GET /bikes (index bikes)
   // POST /bikes (create bike)
   bikes: process.env.apiUrl + '/bikes',
-  // GET /bike/:id (show bike)
-  // PUT /bike/:id (update bike)
-  // DELETE /bike/:id (delete bike)
-  bike: (bikeId) => (process.env.apiUrl + '/bikes/#{id}').replace('#{id}', bikeId)
+  // GET, PUT, DELETE /bike/:id (show, update, delete bike)
+  bike: (bikeId) => (process.env.apiUrl + '/bikes/#{id}').replace('#{id}', bikeId),
+
+  // GET, POST /bikes/:bike_id/fuels (index, create fuels)
+  fuels: (bikeId) => (process.env.apiUrl + '/bikes/#{bike_id}' + '/fuels').replace('#{bike_id}', bikeId),
+  // PUT, DELETE /bikes/:bike_id/fuels/:id (update, destroy fuel)
+  fuel: (bikeId, id) => (process.env.apiUrl + '/bikes/#{bike_id}' + '/fuels/#{id}')
+    .replace('#{bike_id}', bikeId).replace('#{id}', id),
+
+  // GET, POST /bikes/:bike_id/repairs (index, create repairs)
+  repairs: (bikeId) => (process.env.apiUrl + '/bikes/#{bike_id}' + '/repairs').replace('#{bike_id}', bikeId),
+  // PUT, DELETE /bikes/:bike_id/repairs/:id (update, destroy repairs)
+  repair: (bikeId, id) => (process.env.apiUrl + '/bikes/#{bike_id}' + '/repairs/#{id}')
+    .replace('#{bike_id}', bikeId).replace('#{id}', id)
 }

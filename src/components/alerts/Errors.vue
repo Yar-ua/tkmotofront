@@ -1,6 +1,5 @@
 <template>
   <div>
-    haserror: {{ hasErrors() }}
   </div>
 </template>
 
@@ -13,7 +12,7 @@ export default {
   data () {
     return {
       hasErrors: () => {
-        if (this.errors.length !== 0) {
+        if ((this.errors) && (this.errors.length !== 0)) {
           return true
         } else {
           return false

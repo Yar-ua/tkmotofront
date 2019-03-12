@@ -51,6 +51,19 @@
 <!--               <template v-else>
                 <img src="https://www.freeiconspng.com/uploads/no-image-icon-11.PNG" height="150px" alt="Icon No Free Png"/>
               </template> -->
+            <div>
+              <v-btn
+                :to="{name: 'Fuels'}">
+                <v-icon>fas fa-gas-pump</v-icon>
+                Fuel statistic
+              </v-btn>
+              <v-btn
+                :to="{name: 'Repairs'}">
+                <v-icon>build</v-icon>
+                Repair statistic
+              </v-btn>
+              <router-view></router-view>
+            </div>
           </v-container>
 
           </v-card-text>
@@ -60,31 +73,6 @@
             <v-spacer></v-spacer>
             <v-slide-x-reverse-transition>
             </v-slide-x-reverse-transition>
-            <!-- <template v-if="this.$route.params.id == 'new'">
-              <v-btn
-              color="primary"
-              :disabled="!valid"
-              @click="create"
-              >
-              SAVE BIKE
-              </v-btn>
-            </template> -->
-<!--             <template v-if="this.$route.params.id !== 'new'">
-              <v-btn
-              color="primary"
-              :disabled="!valid"
-              @click="update"
-              >
-              UPDATE PRODUCT
-              </v-btn>
-              <v-btn
-              color="error"
-              :disabled="!valid"
-              @click="destroy"
-              >
-              DELETE PRODUCT
-              </v-btn>
-            </template> -->
           </v-card-actions>
         </v-form>
       </v-card>
@@ -100,11 +88,7 @@ export default {
   data: () => {
     return {
       dialog: false,
-      valid: true,
-      hasError: false
-      // imageName: '',
-      // imageUrl: '',
-      // imagefile: ''
+      valid: true
     }
   },
 
@@ -120,11 +104,6 @@ export default {
 
   created () {
     this.$store.dispatch('bike/show', {id: this.$route.params.id})
-      .catch(err => {
-        if (err.response.status !== 200) {
-          this.hasError = true
-        }
-      })
   }
 }
 </script>

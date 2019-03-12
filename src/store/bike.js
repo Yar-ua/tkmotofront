@@ -5,23 +5,35 @@ export default {
   namespaced: true,
   state: {
     addsList: 'bikes list',
-    addItem: {}
+    addItem: {},
+    loading: false
+  },
+
+  getters: {
+    isLoading (state) {
+      return state.loading
+    }
   },
 
   mutations: {
     setBikesList (state, data) {
       state.addsList = data
+      state.loading = false
     },
     updateBikesList (state, data) {
       state.addsList += data
     },
     updateAddItem (state, data) {
       state.addItem = data
+    },
+    setLoading (state, data) {
+      state.loading = data
     }
   },
 
   actions: {
     index (context) {
+      context.commit('setLoading', true)
       return axios.get(API.bikes)
         .then(response => {
           context.commit('setBikesList', response.data.data)

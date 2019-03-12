@@ -3,8 +3,10 @@ import Vuex from 'vuex'
 import axios from 'axios'
 
 import API from './api'
-import bike from './bike'
 import home from './home'
+import bike from './bike'
+import fuel from './fuel'
+import repair from './repair'
 import errors from './alerts/errors'
 import alerts from './alerts/alerts'
 
@@ -33,8 +35,10 @@ const Store = new Vuex.Store({
   },
 
   modules: {
-    bike,
     home,
+    bike,
+    fuel,
+    repair,
     errors,
     alerts
   },
@@ -100,6 +104,17 @@ const Store = new Vuex.Store({
           context.commit('updateAuth', false)
           context.commit('updateTokens', response.headers)
           context.commit('clearLocalStorage', '')
+        })
+        .catch(err => {
+          if (err.response.status !== 200) {
+            this.hasError = true
+            if ((err.response.status === 401) || (err.response.status === 404)) {
+              context.commit('updateUser', {'data': {'id': '', 'name': '', 'email': ''}})
+              context.commit('updateAuth', false)
+              context.commit('updateTokens', err.response.headers)
+              context.commit('clearLocalStorage', '')
+            }
+          }
         })
     }
   }
