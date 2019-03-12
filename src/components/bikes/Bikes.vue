@@ -17,6 +17,13 @@
         </v-btn>
       </template>
     </v-toolbar>
+    <template>
+      <v-progress-linear
+        :indeterminate="true"
+        :hidden="!isLoading"
+        color="deep-orange lighten-2"
+      ></v-progress-linear>
+    </template>
     <v-layout row wrap v-for="item in bikesList" :key="item.id">
       <v-flex xs12>
         <v-card color="purple" class="white--text">
@@ -65,7 +72,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 
 export default {
   name: 'Bikes',
@@ -80,6 +87,7 @@ export default {
     ...mapState('bike', {
       bikesList: 'addsList'
     }),
+    ...mapGetters('bike', ['isLoading']),
     ...mapState({
       user: 'user'
     }),

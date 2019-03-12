@@ -4,12 +4,20 @@ import API from './api'
 export default {
   namespaced: true,
   state: {
-    repairsList: []
+    repairsList: [],
+    loading: false
+  },
+
+  getters: {
+    isLoading (state) {
+      return state.loading
+    }
   },
 
   mutations: {
     setRepairsList (state, data) {
       state.repairsList = data
+      state.loading = false
     },
     pushFuelsList (state, data) {
       state.repairsList.push(data)
@@ -23,11 +31,15 @@ export default {
       var items = state.repairsList
       items.splice(items.indexOf(state.repairsList.find(x => x.id === data.id)), 1)
       state.repairsList = items
+    },
+    setLoading (state, data) {
+      state.loading = data
     }
   },
 
   actions: {
     index (context, params) {
+      context.commit('setLoading', true)
       return axios.get(API.repairs(params.bikeId))
         .then(response => {
           context.commit('setRepairsList', response.data.data)

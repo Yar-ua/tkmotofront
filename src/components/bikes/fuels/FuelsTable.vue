@@ -26,16 +26,32 @@
             <v-container grid-list-md>
               <v-layout wrap>
                 <v-flex xs12 sm6 md4>
-                  <v-text-field v-model="editedItem.odometer" label="Odometer, km"></v-text-field>
+                  <v-text-field
+                    v-model="editedItem.odometer"
+                    label="Odometer, km"
+                    :rules="[rules.mustBeRequired, rules.isDigit, rules.lengthMax]"
+                    ></v-text-field>
                 </v-flex>
                 <v-flex xs12 sm6 md4>
-                  <v-text-field v-model="editedItem.distance" label="Distance, km"></v-text-field>
+                  <v-text-field
+                    v-model="editedItem.distance"
+                    label="Distance, km"
+                    :rules="[rules.mustBeRequired, rules.isDigit, rules.lengthMax]"
+                    ></v-text-field>
                 </v-flex>
                 <v-flex xs12 sm6 md4>
-                  <v-text-field v-model="editedItem.refueling" label="Refueling, l"></v-text-field>
+                  <v-text-field
+                    v-model="editedItem.refueling"
+                    label="Refueling, l"
+                    :rules="[rules.mustBeRequired, rules.isDigit, rules.lengthMax]"
+                    ></v-text-field>
                 </v-flex>
                 <v-flex xs12 sm6 md4>
-                  <v-text-field v-model="editedItem.price_fuel" label="Price, UAN"></v-text-field>
+                  <v-text-field
+                    v-model="editedItem.price_fuel"
+                    label="Price, UAN"
+                    :rules="[rules.mustBeRequired, rules.isDigit, rules.lengthMax]"
+                  ></v-text-field>
                 </v-flex>
               </v-layout>
             </v-container>
@@ -93,6 +109,11 @@ export default {
   data: () => ({
     dialog: false,
     rowsPerPageItems: [10, 20, {'text': '$vuetify.dataIterator.rowsPerPageAll', 'value': -1}],
+    rules: {
+      mustBeRequired: v => !!v || 'Login is required',
+      lengthMax: v => (v && v.length <= 10) || 'Must be less than 10 characters',
+      isDigit: v => /^[+-]?([0-9]*[.])?[0-9]+$/.test(v) || 'Must be digit'
+    },
     headers: [
       {
         text: 'Odometer (km)',

@@ -25,14 +25,27 @@
           <v-card-text>
             <v-container grid-list-md>
               <v-layout wrap>
-                <v-flex xs12 sm6 md4>
-                  <v-text-field v-model="editedItem.description" label="Description of repair"></v-text-field>
+                <v-flex xs12 sm12 md12>
+                  <v-textarea
+                    v-model="editedItem.description"
+                    label="Description of repair"
+                    :rules="[rules.mustBeRequired, rules.lengthMax]"
+                    hint="Hint text"
+                  ></v-textarea>
                 </v-flex>
-                <v-flex xs12 sm6 md4>
-                  <v-text-field v-model="editedItem.detail" label="Changed or repaired detail"></v-text-field>
+                <v-flex xs12 sm12 md12>
+                  <v-textarea
+                    v-model="editedItem.detail"
+                    label="Changed or repaired detail"
+                    :rules="[rules.lengthMax]"
+                  ></v-textarea>
                 </v-flex>
-                <v-flex xs12 sm6 md4>
-                  <v-text-field v-model="editedItem.price_detail" label="Detail or repair cost, UAN"></v-text-field>
+                <v-flex xs12 sm12 md12>
+                  <v-text-field
+                    v-model="editedItem.price_detail"
+                    label="Detail or repair cost, UAN"
+                    :rules="[rules.isDigit, rules.digitLength]"
+                  ></v-text-field>
                 </v-flex>
               </v-layout>
             </v-container>
@@ -89,6 +102,12 @@ export default {
   data: () => ({
     dialog: false,
     rowsPerPageItems: [5, 15, {'text': '$vuetify.dataIterator.rowsPerPageAll', 'value': -1}],
+    rules: {
+      mustBeRequired: v => !!v || 'Login is required',
+      lengthMax: v => (v && v.length <= 4000) || 'Must be less than 4000 characters',
+      digitLength: v => (v && v.length <= 10) || 'Must be less than 10 characters',
+      isDigit: v => /^[+-]?([0-9]*[.])?[0-9]+$/.test(v) || 'Must be digit'
+    },
     headers: [
       {
         text: 'Description',

@@ -1,12 +1,17 @@
 <template>
   <div>
     <hr/>
+    <v-progress-linear
+      :indeterminate="true"
+      color="deep-orange lighten-2"
+      :hidden="!isLoading"
+    ></v-progress-linear>
     <app-fuels-table></app-fuels-table>
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 
 import FuelsTable from '@/components/bikes/fuels/FuelsTable'
 
@@ -21,6 +26,7 @@ export default {
     ...mapState({
       user: 'user'
     }),
+    ...mapGetters('fuel', ['isLoading']),
     isAuth () { return this.$store.getters.isAuth }
   }
 
