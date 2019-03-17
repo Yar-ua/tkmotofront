@@ -96,11 +96,6 @@ export default {
 
   created () {
     this.$store.dispatch('bike/index', '')
-      .catch(err => {
-        if (err.response.status !== 200) {
-          this.hasError = true
-        }
-      })
   }
 
 }

@@ -6,6 +6,7 @@ export default {
   state: {
     addsList: 'bikes list',
     addItem: {},
+    config: {},
     loading: false
   },
 
@@ -28,6 +29,9 @@ export default {
     },
     setLoading (state, data) {
       state.loading = data
+    },
+    setBikeConfig (state, data) {
+      state.config = data
     }
   },
 
@@ -61,6 +65,24 @@ export default {
     },
     delete (context, params) {
       return axios.delete(API.bike(params.id), '')
+    },
+
+    showConfig (context, params) {
+      context.commit('setLoading', true)
+      return axios.get(API.bikeConfig(params.id), '')
+        .then(response => {
+          context.commit('setBikeConfig', response.data.data)
+          context.commit('setLoading', false)
+        })
+    },
+
+    updateConfig (context, params) {
+      context.commit('setLoading', true)
+      return axios.put(API.bikeConfig(params.bikeId), params)
+        .then(response => {
+          context.commit('setBikeConfig', response.data.data)
+          context.commit('setLoading', false)
+        })
     }
   }
 }

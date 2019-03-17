@@ -108,10 +108,11 @@ export default {
 
   data: () => ({
     dialog: false,
+    valid: true,
     rowsPerPageItems: [10, 20, {'text': '$vuetify.dataIterator.rowsPerPageAll', 'value': -1}],
     rules: {
-      mustBeRequired: v => !!v || 'Login is required',
-      lengthMax: v => (v && v.length <= 10) || 'Must be less than 10 characters',
+      mustBeRequired: v => !!v || 'Value is required',
+      lengthMax: v => (v && v.length <= 100) || 'Must be less than 10 characters',
       isDigit: v => /^[+-]?([0-9]*[.])?[0-9]+$/.test(v) || 'Must be digit'
     },
     headers: [

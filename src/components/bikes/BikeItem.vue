@@ -4,15 +4,23 @@
       <v-card>
         <v-form ref="form" v-model="valid" lazy-validation enctype="multipart/form-data">
           <v-toolbar color="grey darken-3">
-            <v-toolbar-title class="white--text">BikeItem: Bike information</v-toolbar-title>
+            <v-toolbar-title class="white--text">Bike information</v-toolbar-title>
               <v-spacer>
                 <v-flex xs12 sm6 class="py-2">
                 </v-flex>
               </v-spacer>
               <template v-if="(user.id == item.user_id)">
                 <v-btn
+                  color="blue-grey darken-1"
+                  :to="{name: 'BikeConfig', params: {id: item.id}}"
+                  small
+                >
+                  Config bike
+                </v-btn>
+                <v-btn
                   color="red darken-3"
                   :to="{name: 'BikeForm', params: {id: item.id}}"
+                  small
                 >
                   Edit bike
                 </v-btn>

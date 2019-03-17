@@ -23,5 +23,8 @@ export default {
   repairs: (bikeId) => (process.env.apiUrl + '/bikes/#{bike_id}' + '/repairs').replace('#{bike_id}', bikeId),
   // PUT, DELETE /bikes/:bike_id/repairs/:id (update, destroy repairs)
   repair: (bikeId, id) => (process.env.apiUrl + '/bikes/#{bike_id}' + '/repairs/#{id}')
-    .replace('#{bike_id}', bikeId).replace('#{id}', id)
+    .replace('#{bike_id}', bikeId).replace('#{id}', id),
+
+  // GET, PUT /bikes/:bike_id/config (show, update bike config)
+  bikeConfig: (bikeId) => (process.env.apiUrl + '/bikes/#{bike_id}' + '/config').replace('#{bike_id}', bikeId)
 }
