@@ -21,7 +21,7 @@
             <v-icon>settings</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
-            <v-list-tile-title>Settings</v-list-tile-title>
+            <v-list-tile-title>{{ $t('header.settings') }}</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
       </v-list>
@@ -36,20 +36,23 @@
         <v-toolbar-title>admin mode</v-toolbar-title>
       </template> -->
       <v-spacer></v-spacer>
+      <button v-for="entry in languages" :key="entry.title" @click="changeLocale(entry.language)">
+        <flag :iso="entry.flag" v-bind:squared=false />
+      </button>
       <v-toolbar-items class="hidden-sm-and-down">
 <!--       <template v-if="user.role === 'admin'">
         <v-btn flat :to="{name: 'UsersList'}">Users control</v-btn>
       </template>
         <v-btn flat :to="{name: 'AddsList'}">Market Menu</v-btn> -->
         <template v-if="!isAuth">
-          <v-btn flat :to="{name: 'SignIn'}">SignIn</v-btn>
-          <v-btn flat :to="{name: 'SignUp'}">SignUp</v-btn>
+          <v-btn flat :to="{name: 'SignIn'}">{{ $t('header.signIn') }}</v-btn>
+          <v-btn flat :to="{name: 'SignUp'}">{{ $t('header.signUp') }}</v-btn>
        </template>
         <template v-if="isAuth">
           <v-btn flat color="yellow">
-            User login: {{ user }}
+            User: {{ user.user }}
           </v-btn>
-          <v-btn flat @click="logoutAction">Logout</v-btn>
+          <v-btn flat @click="logoutAction">{{ $t('header.logout') }}</v-btn>
        </template>
       </v-toolbar-items>
     </v-toolbar>
@@ -58,11 +61,16 @@
 
 <script>
 import { mapState } from 'vuex'
+import i18n from '@/plugins/i18n'
 
 export default {
   name: 'Header',
   data: () => ({
-    drawer: false
+    drawer: false,
+    languages: [
+      { flag: 'us', language: 'en', title: 'English' },
+      { flag: 'ru', language: 'ru', title: 'Russian' }
+    ]
   }),
 
   computed: {
@@ -83,15 +91,9 @@ export default {
             message: 'You logouted cussessfully'
           })
         })
-        // .catch(err => {
-        //   if (err.response.status !== 200) {
-        //     this.hasError = true
-        //     if ((err.response.status === 401) || (err.response.status === 404)) {
-        //       localStorage.clear()
-        //       this.$router.push({ path: '/' })
-        //     }
-        //   }
-        // })
+    },
+    changeLocale (locale) {
+      i18n.locale = locale
     }
   }
 }

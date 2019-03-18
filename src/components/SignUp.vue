@@ -4,15 +4,15 @@
       <v-card>
         <v-form ref="form" v-model="valid" lazy-validation>
           <v-toolbar color="grey darken-3">
-            <v-toolbar-title class="white--text">Register</v-toolbar-title>
+            <v-toolbar-title class="white--text">{{ $t('signUp.registration') }}</v-toolbar-title>
             <v-spacer></v-spacer>
           </v-toolbar>
           <v-card-text>
             <v-text-field
-              label="Login..."
+              :label="$t('signUp.login')"
               :rules="[rules.loginRequired, rules.loginMax]"
               v-model="login"
-              hint="Enter your login!"
+              :hint="$t('signUp.loginHint')"
               persistent-hint
             ></v-text-field>
             <v-text-field
@@ -23,8 +23,8 @@
             ></v-text-field>
             <v-text-field
               name="input-10-1"
-              label="Enter your password"
-              hint="At least 8 characters"
+              :label="$t('signUp.enterPassword')"
+              :hint="$t('signUp.hint')"
               persistent-hint
               v-model="password"
               min="8"
@@ -36,8 +36,8 @@
             ></v-text-field>
             <v-text-field
               name="input-10-1"
-              label="Retype your password"
-              hint="At least 8 characters"
+              :label="$t('signUp.retypePassword')"
+              :hint="$t('signUp.hint')"
               persistent-hint
               v-model="repassword"
               min="8"
@@ -50,7 +50,7 @@
           </v-card-text>
           <v-divider class="mt-5"></v-divider>
           <v-card-actions>
-            <v-btn :to="{name: 'Home'}">Cancel</v-btn>
+            <v-btn :to="{name: 'Home'}">{{ $t('signUp.cancel') }}</v-btn>
             <v-spacer></v-spacer>
             <v-slide-x-reverse-transition>
             </v-slide-x-reverse-transition>
@@ -59,7 +59,7 @@
               :disabled="!valid"
               @click="SignUpAction"
               >
-                SIGN UP
+                {{ $t('signUp.signUp') }}
             </v-btn>
           </v-card-actions>
         </v-form>

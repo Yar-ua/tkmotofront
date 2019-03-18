@@ -1,25 +1,25 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
+    <h1>{{ $t('home.msg') }}</h1>
     <h1>{{ data }}</h1>
     <div>
       <v-btn
         color="primary"
         @click="homeAction"
       >
-        home
+        {{ $t('home.btnHome') }}
       </v-btn>
       <v-btn
         color="primary"
         @click="aboutAction"
       >
-        about
+        {{ $t('home.btnAbout') }}
       </v-btn>
       <v-btn
         color="primary"
         @click="secureAction"
       >
-        secure
+        {{ $t('home.btnSecure') }}
       </v-btn>
     </div>
   </div>
@@ -32,11 +32,6 @@ import { mapState } from 'vuex'
 export default {
   name: 'Home',
   body: '',
-  data () {
-    return {
-      msg: 'My home page'
-    }
-  },
   computed: {
     ...mapState('home', {
       data: 'data'
