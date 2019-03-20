@@ -4,7 +4,13 @@
     <GChart
       type="ColumnChart"
       :data="fuelData"
-      :options="chartOptions"
+      :options="fuelChartOptions"
+    />
+    <hr/>
+    <GChart
+      type="ColumnChart"
+      :data="taxData"
+      :options="taxChartOptions"
     />
   </div>
 </template>
@@ -21,35 +27,55 @@ export default {
 
   computed: {
     ...mapState('fuel', {
-      fuelsChartRowData: 'fuelsList'
+      fuelsList: 'fuelsList'
     }),
     fuelData () {
       return this.getFuelArray()
+    },
+    taxData () {
+      return this.getTaxArray()
     }
   },
 
   data () {
     return {
-      // Array will be automatically processed with visualization.arrayToDataTable function
-      chartOptions: {
+      fuelChartOptions: {
         chart: {
-          title: 'Fuel stata',
           subtitle: 'Fuel consumption per 100 km and tax per 1 km'
-        }
+        },
+        title: 'Fuel per 100 km'
+      },
+      taxChartOptions: {
+        chart: {
+          subtitle: 'Tax per 1 km'
+        },
+        title: 'Tax per 100 km',
+        colors: ['#e0440e']
       }
     }
   },
 
   methods: {
     getFuelArray () {
-      var data = this.fuelsChartRowData
+      var data = this.fuelsList
       var arr = []
       arr.push(['Distance', 'L / 100 km'])
       for (var i = 0; i < data.length; i++) {
         arr.push([
           i + 1,
           Math.round((data[i].refueling * 100 / data[i].distance) * 100) / 100
-          // Math.round((item.price_fuel / item.distance) * 100) / 100
+        ])
+      }
+      return arr
+    },
+    getTaxArray () {
+      var data = this.fuelsList
+      var arr = []
+      arr.push(['Distance', 'UAN / 1 km'])
+      for (var i = 0; i < data.length; i++) {
+        arr.push([
+          i + 1,
+          Math.round((data[i].price_fuel * 100 / data[i].distance) * 100) / 100
         ])
       }
       return arr

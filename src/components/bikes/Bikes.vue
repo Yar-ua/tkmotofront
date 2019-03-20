@@ -31,7 +31,9 @@
             <v-flex xs7>
               <v-card-title primary-title>
                 <div>
-                  ID: {{ item.id }}
+                  <u v-if="user.id === item.user_id">
+                    your bike
+                  </u>
                   <div class="headline">{{ item.name }}</div>
                   <div>Engine volume: {{ item.volume }} ccm3</div>
                   <div>Color: {{ item.color }}</div>

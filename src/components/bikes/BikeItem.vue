@@ -38,9 +38,8 @@
             </v-flex>
             <v-flex>
             <p>Tech information:</p>
-            <p>XXX: YYY</p>
-            <p>XXX: YYY</p>
-            <p>XXX: YYY</p>
+            <p>Odometer, km: {{ odometer }}</p>
+            <p>Oil change distance, km: {{ config.oil_change }}</p>
             </v-flex>
 <!--               <template v-if="item.imageUrl != null">
                 <img v-bind:src="item.imageUrl">
@@ -70,7 +69,9 @@
                 <v-icon>build</v-icon>
                 Repair statistic
               </v-btn>
+
               <router-view></router-view>
+
             </div>
           </v-container>
 
@@ -102,7 +103,9 @@ export default {
 
   computed: {
     ...mapState('bike', {
-      item: 'addItem'
+      item: 'addItem',
+      odometer: 'odometer',
+      config: 'config'
     }),
     ...mapState({
       user: 'user'
@@ -112,6 +115,8 @@ export default {
 
   created () {
     this.$store.dispatch('bike/show', {id: this.$route.params.id})
+    this.$store.dispatch('bike/fuellast', {id: this.$route.params.id})
+    this.$store.dispatch('bike/showConfig', {id: this.$route.params.id})
   }
 }
 </script>
