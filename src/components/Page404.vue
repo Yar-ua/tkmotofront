@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Page not found</h1>
+    <h1>{{ $t('page404.msg') }}</h1>
   </div>
 </template>
 

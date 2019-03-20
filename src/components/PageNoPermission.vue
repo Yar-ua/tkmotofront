@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>You haven't permission for this page</h1>
+    <h1>{{ $t('pageNoPermission.msg') }}</h1>
   </div>
 </template>
 

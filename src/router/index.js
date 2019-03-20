@@ -11,6 +11,7 @@ import BikesSheet from '@/components/bikes/BikesSheet'
 import Bikes from '@/components/bikes/Bikes'
 import BikeForm from '@/components/bikes/BikeForm'
 import BikeItem from '@/components/bikes/BikeItem'
+import BikeConfig from '@/components/bikes/BikeConfig'
 
 import Fuels from '@/components/bikes/fuels/Fuels'
 import Repairs from '@/components/bikes/repairs/Repairs'
@@ -74,6 +75,11 @@ export default new Router({
           name: 'BikeItem',
           component: BikeItem,
           children: [
+            {
+              path: 'config',
+              name: 'BikeConfig',
+              component: BikeConfig
+            },
             {
               path: 'fuels',
               name: 'Fuels',

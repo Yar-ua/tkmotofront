@@ -12,6 +12,7 @@
       color="primary"
       small
       @click="createNewItem()"
+      v-if="isAuth"
       >
       New Item
       </v-btn>
@@ -75,12 +76,14 @@
             small
             class="mr-2"
             @click="editItem(props.item)"
+            v-if="isAuth"
           >
             edit
           </v-icon>
           <v-icon
             small
             @click="deleteItem(props.item)"
+            v-if="isAuth"
           >
             delete
           </v-icon>
@@ -103,7 +106,7 @@ export default {
     dialog: false,
     rowsPerPageItems: [5, 15, {'text': '$vuetify.dataIterator.rowsPerPageAll', 'value': -1}],
     rules: {
-      mustBeRequired: v => !!v || 'Login is required',
+      mustBeRequired: v => !!v || 'Value is required',
       lengthMax: v => (v && v.length <= 4000) || 'Must be less than 4000 characters',
       digitLength: v => (v && v.length <= 10) || 'Must be less than 10 characters',
       isDigit: v => /^[+-]?([0-9]*[.])?[0-9]+$/.test(v) || 'Must be digit'
@@ -136,7 +139,8 @@ export default {
     }),
     formTitle () {
       return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
-    }
+    },
+    isAuth () { return this.$store.getters.isAuth }
   },
 
   watch: {

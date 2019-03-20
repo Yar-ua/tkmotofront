@@ -4,7 +4,7 @@
       <v-card>
         <v-form ref="form" v-model="valid" lazy-validation enctype="multipart/form-data">
           <v-toolbar color="grey darken-3">
-            <v-toolbar-title class="white--text">BikeForm: Create or update bike</v-toolbar-title>
+            <v-toolbar-title class="white--text">Create or update bike</v-toolbar-title>
             <v-spacer></v-spacer>
           </v-toolbar>
           <v-card-text>
@@ -15,15 +15,18 @@
                   v-model="item.name"
                   label="Bike name"
                   :rules="[rules.isRequired, rules.nameLength]"
+                  :counter="30"
                 ></v-text-field>
                 <v-text-field
                   v-model="item.volume"
                   label="Engine volume, ccm3"
                   :rules="[rules.isRequired, rules.beDigit, rules.volumeLength]"
+                  :counter="10"
                 ></v-text-field>
                 <v-text-field
                   v-model="item.color"
                   label="Color"
+                  :counter="20"
                   :rules="[rules.isRequired, rules.colorLength]"
                 ></v-text-field>
                 <v-text-field

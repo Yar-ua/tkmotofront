@@ -6,7 +6,9 @@ export default {
   state: {
     addsList: 'bikes list',
     addItem: {},
-    loading: false
+    config: {},
+    loading: false,
+    odometer: 0
   },
 
   getters: {
@@ -28,6 +30,12 @@ export default {
     },
     setLoading (state, data) {
       state.loading = data
+    },
+    setBikeConfig (state, data) {
+      state.config = data
+    },
+    setOdometer (state, data) {
+      state.odometer = data.odometer
     }
   },
 
@@ -61,6 +69,33 @@ export default {
     },
     delete (context, params) {
       return axios.delete(API.bike(params.id), '')
+    },
+
+    fuellast (context, params) {
+      return axios.get(API.bikeFuel(params.id), '')
+        .then(response => {
+          if (response.data.data !== null) {
+            context.commit('setOdometer', response.data.data)
+          }
+        })
+    },
+
+    showConfig (context, params) {
+      context.commit('setLoading', true)
+      return axios.get(API.bikeConfig(params.id), '')
+        .then(response => {
+          context.commit('setBikeConfig', response.data.data)
+          context.commit('setLoading', false)
+        })
+    },
+
+    updateConfig (context, params) {
+      context.commit('setLoading', true)
+      return axios.put(API.bikeConfig(params.bikeId), params)
+        .then(response => {
+          context.commit('setBikeConfig', response.data.data)
+          context.commit('setLoading', false)
+        })
     }
   }
 }

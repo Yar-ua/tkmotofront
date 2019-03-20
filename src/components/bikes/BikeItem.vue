@@ -4,15 +4,23 @@
       <v-card>
         <v-form ref="form" v-model="valid" lazy-validation enctype="multipart/form-data">
           <v-toolbar color="grey darken-3">
-            <v-toolbar-title class="white--text">BikeItem: Bike information</v-toolbar-title>
+            <v-toolbar-title class="white--text">Bike information</v-toolbar-title>
               <v-spacer>
                 <v-flex xs12 sm6 class="py-2">
                 </v-flex>
               </v-spacer>
               <template v-if="(user.id == item.user_id)">
                 <v-btn
+                  color="blue-grey darken-1"
+                  :to="{name: 'BikeConfig', params: {id: item.id}}"
+                  small
+                >
+                  Config bike
+                </v-btn>
+                <v-btn
                   color="red darken-3"
                   :to="{name: 'BikeForm', params: {id: item.id}}"
+                  small
                 >
                   Edit bike
                 </v-btn>
@@ -30,9 +38,8 @@
             </v-flex>
             <v-flex>
             <p>Tech information:</p>
-            <p>XXX: YYY</p>
-            <p>XXX: YYY</p>
-            <p>XXX: YYY</p>
+            <p>Odometer, km: {{ odometer }}</p>
+            <p>Oil change distance, km: {{ config.oil_change }}</p>
             </v-flex>
 <!--               <template v-if="item.imageUrl != null">
                 <img v-bind:src="item.imageUrl">
@@ -62,7 +69,9 @@
                 <v-icon>build</v-icon>
                 Repair statistic
               </v-btn>
+
               <router-view></router-view>
+
             </div>
           </v-container>
 
@@ -94,7 +103,9 @@ export default {
 
   computed: {
     ...mapState('bike', {
-      item: 'addItem'
+      item: 'addItem',
+      odometer: 'odometer',
+      config: 'config'
     }),
     ...mapState({
       user: 'user'
@@ -104,6 +115,8 @@ export default {
 
   created () {
     this.$store.dispatch('bike/show', {id: this.$route.params.id})
+    this.$store.dispatch('bike/fuellast', {id: this.$route.params.id})
+    this.$store.dispatch('bike/showConfig', {id: this.$route.params.id})
   }
 }
 </script>

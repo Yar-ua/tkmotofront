@@ -28,7 +28,7 @@ export default {
   watch: {
     errors: function () {
       if (this.hasErrors() === true) {
-        this.flashMessage.show({status: 'error', title: 'Error', message: this.errors[0]})
+        this.flashMessage.show({status: 'error', title: 'Error', message: this.errors})
       }
     }
   }

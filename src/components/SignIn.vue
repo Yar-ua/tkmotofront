@@ -4,7 +4,7 @@
       <v-card>
         <v-form ref="form" v-model="valid" lazy-validation>
           <v-toolbar color="grey darken-3">
-            <v-toolbar-title class="white--text">Login</v-toolbar-title>
+            <v-toolbar-title class="white--text">{{ $t('signIn.login') }}</v-toolbar-title>
             <v-spacer></v-spacer>
           </v-toolbar>
           <v-card-text>
@@ -20,15 +20,17 @@
               :rules="[rules.passRequired, rules.passMin, rules.passMax]"
               :type="show ? 'text' : 'password'"
               name="input-10-1"
-              label="Password"
-              hint="At least 8 characters"
+              :label="$t('signIn.password')"
+              :hint="$t('signIn.hint')"
               counter
               @click:append="show = !show"
             ></v-text-field>
           </v-card-text>
           <v-divider class="mt-5"></v-divider>
           <v-card-actions>
-            <v-btn :to="{name: 'Home'}">Cancel</v-btn>
+            <v-btn :to="{name: 'Home'}">
+              {{ $t('signIn.cancel') }}
+            </v-btn>
             <v-spacer></v-spacer>
             <v-slide-x-reverse-transition>
             </v-slide-x-reverse-transition>
@@ -37,7 +39,7 @@
             :disabled="!valid"
             @click="signInAction"
             >
-              SignIn
+              {{ $t('signIn.signIn') }}
             </v-btn>
           </v-card-actions>
         </v-form>
