@@ -136,9 +136,13 @@ axios.interceptors.response.use(function (response) {
   Store.commit('errors/setErrors', response.data.errors)
   return response
 }, function (error) {
-  Store.commit('alerts/setAlerts', error.response.data.alerts)
-  Store.commit('errors/setErrors', error.response.data.errors)
-  return Promise.reject(error)
+  if (error.response === undefined) {
+    Store.commit('errors/setErrors', 'Internal server error')
+  } else {
+    Store.commit('alerts/setAlerts', error.response.data.alerts)
+    Store.commit('errors/setErrors', error.response.data.errors)
+    return Promise.reject(error)
+  }
 })
 
 function setTokensInHeaders (config) {

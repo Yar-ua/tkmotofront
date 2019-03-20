@@ -1,5 +1,6 @@
 <template>
   <div>
+    <app-fuel-charts></app-fuel-charts>
     <v-toolbar flat color="grey darken-3">
       <v-toolbar-title>Fuel Information</v-toolbar-title>
       <v-divider
@@ -77,6 +78,12 @@
         <td class="text-xs-left">{{ props.item.distance }}</td>
         <td class="text-xs-left">{{ props.item.refueling }}</td>
         <td class="text-xs-left">{{ props.item.price_fuel }}</td>
+        <td class="text-xs-left">
+          {{ Math.round( (props.item.refueling * 100 / props.item.distance), -2) }}
+        </td>
+        <td class="text-xs-left">
+          {{ props.item.price_fuel / props.item.distance }}
+        </td>
         <td class="justify-center layout px-0">
           <v-icon
             small
@@ -102,9 +109,13 @@
 
 <script>
 import { mapState } from 'vuex'
+import FuelCharts from '@/components/bikes/fuels/FuelCharts'
 
 export default {
   name: 'FuelsTable',
+  components: {
+    'app-fuel-charts': FuelCharts
+  },
 
   data: () => ({
     dialog: false,
@@ -123,7 +134,9 @@ export default {
       },
       { text: 'Distance (km)', value: 'distance' },
       { text: 'Refueling (l)', value: 'reflueing' },
-      { text: 'Price (UAN)', value: 'price' }
+      { text: 'Price (UAN)', value: 'price' },
+      { text: 'liters per 100 km', value: 'lpkm' },
+      { text: 'Tax by 1 km, UAN', value: 'taxBy1km' }
     ],
     newItem: {
       odometer: 0,
