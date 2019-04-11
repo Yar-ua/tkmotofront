@@ -39,7 +39,7 @@
       <button v-for="entry in languages" :key="entry.title" @click="changeLocale(entry.language)">
         <flag :iso="entry.flag" v-bind:squared=false />
       </button>
-      <v-toolbar-items class="hidden-sm-and-down">
+      <v-toolbar-items>
 <!--       <template v-if="user.role === 'admin'">
         <v-btn flat :to="{name: 'UsersList'}">Users control</v-btn>
       </template>

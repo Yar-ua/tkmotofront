@@ -35,7 +35,7 @@ export default {
       state.config = data
     },
     setOdometer (state, data) {
-      state.odometer = data.odometer
+      state.odometer = data
     }
   },
 
@@ -74,8 +74,10 @@ export default {
     fuellast (context, params) {
       return axios.get(API.bikeFuel(params.id), '')
         .then(response => {
-          if (response.data.data !== null) {
-            context.commit('setOdometer', response.data.data)
+          try {
+            context.commit('setOdometer', response.data.data.odometer)
+          } catch (e) {
+            context.commit('setOdometer', 0)
           }
         })
     },

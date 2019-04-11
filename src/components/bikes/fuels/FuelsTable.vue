@@ -180,6 +180,9 @@ export default {
     initialize () {
       this.$store.dispatch('fuel/index', {bikeId: this.$route.params.id})
     },
+    getFuelsLast () {
+      this.$store.dispatch('bike/fuellast', {id: this.$route.params.id})
+    },
 
     fuelParams () {
       var params = {
@@ -192,20 +195,24 @@ export default {
     },
 
     createFuel (item) {
-      this.$store.dispatch('fuel/create',
+      return this.$store.dispatch('fuel/create',
         {
           bikeId: this.$route.params.id,
           fuel: this.fuelParams()
-        })
+        }).then(() => {
+        this.getFuelsLast()
+      })
     },
 
     updateFuel (item) {
-      this.$store.dispatch('fuel/update',
+      return this.$store.dispatch('fuel/update',
         {
           bikeId: this.$route.params.id,
           id: this.editedItem.id,
           fuel: this.fuelParams()
-        })
+        }).then(() => {
+        this.getFuelsLast()
+      })
     },
 
     createNewItem () {
@@ -219,9 +226,11 @@ export default {
 
     deleteItem (item) {
       if (confirm('Are you sure you want to delete this item?')) {
-        this.$store.dispatch('fuel/delete', {
+        return this.$store.dispatch('fuel/delete', {
           bikeId: this.$route.params.id,
           id: item.id
+        }).then(() => {
+          this.getFuelsLast()
         })
       }
     },
