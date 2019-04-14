@@ -2,25 +2,19 @@
   <div>
     <h4> {{ text }}  </h4>
     <hr/><br/>
-    <v-progress-linear
-      :indeterminate="true"
-      color="deep-orange lighten-2"
-      :hidden="!isLoading"
-    ></v-progress-linear>
     <v-text-field
-      v-model="item.oil_change"
-      label="Oil change period, km"
+      v-model="value"
+      label="Distance where oil in gearbox was changed on, km"
       :rules="[rules.beDigit]"
     ></v-text-field>
     <v-btn
     color="primary"
     small
-    @click="update"
+    @click="create"
     :disabled="!valid"
     >
-    SAVE CONFIG
+    SAVE OIL CHANGE
     </v-btn>
-
   </div>
 </template>
 
@@ -28,11 +22,12 @@
 import { mapState, mapGetters } from 'vuex'
 
 export default {
-  name: 'BikeConfig',
+  name: 'Oil',
   data: () => {
     return {
       dialog: false,
-      text: 'bike settings',
+      text: 'on ... km oil was changed',
+      value: 0,
       rules: {
         beDigit: v => /^[-+]?[0-9]*[.,]?[0-9]+(?:[eE][-+]?[0-9]+)?$/.test(v) || 'Must be digit'
       },
@@ -42,29 +37,23 @@ export default {
   },
 
   computed: {
-    ...mapGetters('bike', ['isLoading']),
-    ...mapState('bike', {
-      item: 'config'
-    })
+    ...mapGetters('bike', ['isLoading'])
   },
 
   methods: {
-    bikeConfigParams () {
+    oilConfigParams () {
       var params = {
         bikeId: this.$route.params.id,
-        oil_change: this.item.oil_change
+        oil_distance: this.value
       }
       return params
     },
 
-    update: function () {
-      var params = this.bikeConfigParams()
-      this.$store.dispatch('bike/updateConfig', params)
+    create: function () {
+      var params = this.oilConfigParams()
+      console.log(params)
+      // this.$store.dispatch('bike/updateConfig', params)
     }
-  },
-
-  created () {
-    this.$store.dispatch('bike/showConfig', {id: this.$route.params.id})
   }
 }
 </script>

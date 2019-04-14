@@ -5,7 +5,8 @@ export default {
   namespaced: true,
   state: {
     fuelsList: [],
-    loading: false
+    loading: false,
+    odometer: 0
   },
 
   getters: {
@@ -34,6 +35,9 @@ export default {
     },
     setLoading (state, data) {
       state.loading = data
+    },
+    setOdometer (state, data) {
+      state.odometer = data
     }
   },
 
@@ -66,6 +70,16 @@ export default {
         .then(response => {
           if (response.status === 200) {
             context.commit('removeItemFromFuelsList', params)
+          }
+        })
+    },
+    fuellast (context, params) {
+      return axios.get(API.bikeFuel(params.id), '')
+        .then(response => {
+          try {
+            context.commit('setOdometer', response.data.data)
+          } catch (e) {
+            context.commit('setOdometer', 0)
           }
         })
     }

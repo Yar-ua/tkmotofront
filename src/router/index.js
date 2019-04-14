@@ -15,6 +15,7 @@ import BikeConfig from '@/components/bikes/BikeConfig'
 
 import Fuels from '@/components/bikes/fuels/Fuels'
 import Repairs from '@/components/bikes/repairs/Repairs'
+import Oil from '@/components/bikes/oil/Oil'
 
 import store from '../store'
 
@@ -89,6 +90,11 @@ export default new Router({
               path: 'repairs',
               name: 'Repairs',
               component: Repairs
+            },
+            {
+              path: 'oil',
+              name: 'Oil',
+              component: Oil
             }
           ]
         }

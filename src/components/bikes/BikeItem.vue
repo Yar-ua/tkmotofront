@@ -39,7 +39,16 @@
             <v-flex>
             <p>Tech information:</p>
             <p>Odometer, km: {{ odometer }}</p>
-            <p>Oil change distance, km: {{ config.oil_change }}</p>
+            <p>Distance to oil change, km:<span v-html="value"></span></p>
+            <template v-if="(user.id == item.user_id)">
+              <v-btn
+                color="blue-grey darken-1"
+                :to="{name: 'Oil', params: {id: item.id}}"
+                small
+              >
+                Change oil
+              </v-btn>
+            </template>
             </v-flex>
 <!--               <template v-if="item.imageUrl != null">
                 <img v-bind:src="item.imageUrl">
@@ -102,21 +111,45 @@ export default {
   },
 
   computed: {
-    ...mapState('bike', {
-      item: 'addItem',
-      odometer: 'odometer',
-      config: 'config'
-    }),
     ...mapState({
       user: 'user'
     }),
-    isAuth () { return this.$store.getters.isAuth }
+    ...mapState('bike', {
+      item: 'addItem',
+      config: 'config'
+    }),
+    ...mapState('fuel', {
+      odometer: 'odometer'
+    }),
+    ...mapState('oil', {
+      oilLastChange: 'oilLastChange'
+    }),
+    isAuth () { return this.$store.getters.isAuth },
+    value: function () {
+      let delta = this.config.oil_change - (this.odometer - this.oilLastChange)
+      let color = this.getColor(delta)
+      let text = `<span style="color: ${color}">${delta}</span>`
+      return text
+    }
+  },
+
+  methods: {
+    getColor (value) {
+      if (value >= 150) {
+        return ''
+      } else if ((value <= 100) && (value >= 0)) {
+        return 'yellow'
+      } else {
+        return 'red'
+      }
+    }
   },
 
   created () {
     this.$store.dispatch('bike/show', {id: this.$route.params.id})
-    this.$store.dispatch('bike/fuellast', {id: this.$route.params.id})
+    this.$store.dispatch('fuel/fuellast', {id: this.$route.params.id})
     this.$store.dispatch('bike/showConfig', {id: this.$route.params.id})
+    this.$store.dispatch('oil/oillast', {id: this.$route.params.id})
   }
 }
 </script>
