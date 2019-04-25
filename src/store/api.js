@@ -21,8 +21,11 @@ export default {
 
   // GET /bike/:bike_id/fuellast (show fuel item with the biggest odometer)
   bikeFuel: (bikeId) => (process.env.apiUrl + '/bikes/#{id}/fuellast').replace('#{id}', bikeId),
+
   // GET /bike/:bike_id/oillast (show the distance, where oil was changed)
   bikeOil: (bikeId) => (process.env.apiUrl + '/bikes/#{id}/oillast').replace('#{id}', bikeId),
+  // POST /bike/:bike_id/oils (create new oil for bike
+  bikeOilCreate: (bikeId) => (process.env.apiUrl + '/bikes/#{bike_id}/oils').replace('#{bike_id}', bikeId),
 
   // GET, POST /bikes/:bike_id/repairs (index, create repairs)
   repairs: (bikeId) => (process.env.apiUrl + '/bikes/#{bike_id}' + '/repairs').replace('#{bike_id}', bikeId),

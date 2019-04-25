@@ -10,6 +10,8 @@ export default {
   mutations: {
     setOilLastChange (state, data) {
       if (data != null) {
+        console.log('data ')
+        console.log(data)
         state.oilLastChange = data
       }
     }
@@ -21,6 +23,18 @@ export default {
         .then(response => {
           try {
             context.commit('setOilLastChange', response.data.data)
+          } catch (e) {
+            context.commit('setOilLastChange', 0)
+          }
+        })
+    },
+    createOil (context, params) {
+      return axios.post(API.bikeOilCreate(params.bikeId), params)
+        .then(response => {
+          try {
+            console.log('resp ')
+            console.log(response.data.data.oil_distance)
+            context.commit('setOilLastChange', response.data.data.oil_distance)
           } catch (e) {
             context.commit('setOilLastChange', 0)
           }

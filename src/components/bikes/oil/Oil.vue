@@ -37,7 +37,10 @@ export default {
   },
 
   computed: {
-    ...mapGetters('bike', ['isLoading'])
+    ...mapGetters('bike', ['isLoading']),
+    ...mapState('oil', {
+      item: 'oilLastChange'
+    })
   },
 
   methods: {
@@ -51,8 +54,7 @@ export default {
 
     create: function () {
       var params = this.oilConfigParams()
-      console.log(params)
-      // this.$store.dispatch('bike/updateConfig', params)
+      this.$store.dispatch('oil/createOil', params)
     }
   }
 }
